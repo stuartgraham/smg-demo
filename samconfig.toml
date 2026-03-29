@@ -4,7 +4,7 @@ version = 0.1
 stack_name = "smg-site"
 resolve_s3 = true
 s3_prefix = "smg-site"
-region = "eu-west-2"
+region = "eu-west-1"
 confirm_changeset = false
 capabilities = "CAPABILITY_NAMED_IAM"
 parameter_overrides = "DomainName= AcmCertificateArn="

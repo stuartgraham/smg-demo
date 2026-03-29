@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  AWS_REGION: eu-west-2
+  AWS_REGION: eu-west-1
 
 permissions:
   id-token: write
