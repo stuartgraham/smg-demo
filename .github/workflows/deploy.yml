@@ -3,25 +3,24 @@ name: Deploy Site
 on:
   push:
     branches: [main]
-  workflow_dispatch:      # manual trigger
+  workflow_dispatch:
 
-# Cancel in-flight deploys on new push
 concurrency:
   group: deploy
   cancel-in-progress: true
 
 env:
-  AWS_REGION: eu-west-2   # London — closest to Edinburgh
+  AWS_REGION: eu-west-2
 
 permissions:
-  id-token: write         # OIDC
+  id-token: write
   contents: read
 
 jobs:
   deploy:
     name: Build & Deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
@@ -39,29 +38,43 @@ jobs:
       - name: Build site
         run: npm run build
 
+      - name: Setup SAM CLI
+        uses: aws-actions/setup-sam@v2
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          # Option A: OIDC (recommended, no long-lived keys)
-          # Set up an IAM Identity Provider for GitHub Actions
-          # and a role with the DeployPolicy attached.
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
-          # Option B: IAM user (fallback — set AWS_ACCESS_KEY_ID
-          # and AWS_SECRET_ACCESS_KEY as secrets instead)
-          # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Deploy CloudFront stack
+        run: |
+          sam deploy \
+            --parameter-overrides \
+              DomainName=${{ secrets.DOMAIN_NAME }} \
+              AcmCertificateArn=${{ secrets.ACM_CERTIFICATE_ARN }}
+
+      - name: Read stack outputs
+        id: stack
+        run: |
+          OUTPUTS=$(aws cloudformation describe-stacks \
+            --stack-name smg-site \
+            --query 'Stacks[0].Outputs' \
+            --region ${{ env.AWS_REGION }} \
+            --output json)
+          echo "bucket=$(echo "$OUTPUTS" | jq -r '.[] | select(.OutputKey=="BucketName") | .OutputValue')" >> "$GITHUB_OUTPUT"
+          echo "dist_id=$(echo "$OUTPUTS" | jq -r '.[] | select(.OutputKey=="DistributionId") | .OutputValue')" >> "$GITHUB_OUTPUT"
+          echo "site_url=$(echo "$OUTPUTS" | jq -r '.[] | select(.OutputKey=="SiteUrl") | .OutputValue')" >> "$GITHUB_OUTPUT"
 
       - name: Sync to S3
         run: |
-          aws s3 sync dist/ s3://${{ secrets.S3_BUCKET }} \
+          aws s3 sync dist/ s3://${{ steps.stack.outputs.bucket }} \
             --delete \
             --cache-control "public, max-age=86400" \
             --exclude "*.html" \
             --exclude "*.json"
 
-          # HTML and JSON get shorter cache (1 hour) so updates propagate faster
-          aws s3 sync dist/ s3://${{ secrets.S3_BUCKET }} \
+          aws s3 sync dist/ s3://${{ steps.stack.outputs.bucket }} \
             --cache-control "public, max-age=3600" \
             --include "*.html" \
             --include "*.json" \
@@ -70,5 +83,8 @@ jobs:
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --distribution-id ${{ steps.stack.outputs.dist_id }} \
             --paths "/*"
+
+      - name: Site URL
+        run: echo "Site deployed at ${{ steps.stack.outputs.site_url }}"
