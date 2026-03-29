@@ -1,0 +1,37 @@
+{% extends "templates/base.njk" %}
+{% set description = "Latest news, announcements and updates from Scots Music Group Edinburgh." %}
+{% set canonical = "news.html" %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1>News &amp; Announcements</h1>
+    <p>The latest from Scots Music Group.</p>
+  </div>
+</div>
+
+<section class="section section--cream" aria-labelledby="news-heading">
+  <div class="container">
+    <h2 id="news-heading" class="sr-only">All news</h2>
+    <div class="grid grid-3">
+      {% set allPosts = [
+        { title: 'Term 3 Now Open For Booking', date: '25 March 2026', excerpt: 'Our Early Bird pricing for Term 3 is now live! Book before April 7th and save money on your courses. We are also offering short courses for Banjo players and our popular Playing For Dancing sessions.', url: 'https://www.scotsmusic.org/blog/term-3-now-open-for-booking/' },
+        { title: 'Scots Music Group AGM Sunday March 1st', date: '24 February 2026', excerpt: 'The SMG Annual General Meeting 2026 is on Sunday 1st of March at 2pm at Christ Church Centre, 6A Morningside Road, Edinburgh. The AGM is a vital part of representing our members\' interests.', url: 'https://www.scotsmusic.org/blog/scots-music-group-agm-sunday-march-1st/' },
+        { title: 'Mid Term Week 17th to 19th February', date: '29 January 2026', excerpt: 'A reminder to all students that this is our mid term break for Term 2 this week. All classes will resume next week.', url: 'https://www.scotsmusic.org/blog/no-classes-thursday-29th-january-at-gillespies-hs/' }
+      ] %}
+      {% for post in allPosts %}
+      <a href="{{ post.url }}" class="card reveal" style="text-decoration:none;display:flex;flex-direction:column;">
+        <div style="background:var(--clr-maroon);padding:var(--sp-sm) var(--sp-lg);">
+          <span style="font-size:0.7rem;color:var(--clr-amber-light);font-weight:500;text-transform:uppercase;letter-spacing:0.05em;">{{ post.date }}</span>
+        </div>
+        <div class="card-body" style="flex:1;display:flex;flex-direction:column;">
+          <h3 style="font-family:var(--ff-display);font-size:1.2rem;font-weight:700;color:var(--clr-maroon-deep);margin-bottom:var(--sp-sm);">{{ post.title }}</h3>
+          <p style="font-size:0.88rem;color:var(--clr-stone);flex:1;">{{ post.excerpt }}</p>
+          <span style="display:inline-flex;align-items:center;gap:4px;margin-top:var(--sp-md);font-size:0.85rem;font-weight:600;color:var(--clr-maroon);">Read more &#8594;</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

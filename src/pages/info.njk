@@ -1,0 +1,164 @@
+{% extends "templates/base.njk" %}
+{% set description = "Membership, fees, term dates, class FAQs, refund policy, and traditional music directory for Scots Music Group Edinburgh." %}
+{% set canonical = "info.html" %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1>Info &amp; Help</h1>
+    <p>Everything you need to know about membership, fees, term dates, and frequently asked questions.</p>
+  </div>
+</div>
+
+<section class="section section--cream section--compact">
+  <div class="container" style="display:flex;gap:var(--sp-md);flex-wrap:wrap;justify-content:center;">
+    <a href="#membership" class="btn btn-outline btn-sm">Membership</a>
+    <a href="#fees" class="btn btn-outline btn-sm">Fees &amp; Dates</a>
+    <a href="#classfaq" class="btn btn-outline btn-sm">Class FAQ</a>
+    <a href="#directory" class="btn btn-outline btn-sm">Music Directory</a>
+  </div>
+</section>
+
+{# ===== MEMBERSHIP ===== #}
+<section id="membership" class="section section--white" aria-labelledby="mem-heading">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header">
+      <span class="section-label">Membership</span>
+      <h2 id="mem-heading" class="section-title">Membership &amp; Refunds</h2>
+    </div>
+    <div class="accordion reveal">
+      {% set memItems = [
+        { q: 'Membership', a: '<p>Annual membership runs 1 Aug to 31 Jul: <strong>&pound;20 full / &pound;15 concession</strong>.</p><p>Benefits: discount on class fees, a vote at the AGM, discount on publications, insurance cover during classes.</p><p>Membership is optional.</p>' },
+        { q: 'How to buy membership', a: '<p>New to SMG? Sign up to register. Then sign in, click &ldquo;Membership&rdquo; then &ldquo;Enrol&rdquo; to purchase.</p><p>Buy membership <em>before</em> booking classes to get the discount.</p>' },
+        { q: 'How to pay', a: '<ul><li><strong>Online</strong> by card via Bookeo/PayPal</li><li><strong>Bank transfer</strong> &mdash; contact office for details</li><li><strong>Cheque</strong> payable to Scots Music Group, post to: Eric Liddell Community, 15 Morningside Road, EH10 4DP</li><li><strong>Cash</strong> &mdash; contact office to arrange</li></ul>' },
+        { q: 'Cancellation &amp; refunds', a: '<p><strong>Standard classes:</strong></p><ul><li>7+ days before first class: 75% refund</li><li>Under 7 days before: 50% refund</li><li>Within first 3 weeks of term: 25% refund</li><li>After week 3: no refund</li></ul><p><strong>Membership:</strong> only refunded alongside class fees. Standalone memberships non-refundable.</p><p><strong>Short courses &amp; workshops:</strong> non-refundable.</p><p><strong>Ceilidh tickets:</strong> non-refundable. You may resell tickets yourself.</p><p>Exceptional hardship? Contact the office in confidence.</p>' }
+      ] %}
+      {% for item in memItems %}
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="mem-{{ loop.index }}">{{ item.q | safe }}</button>
+        <div class="accordion-panel" id="mem-{{ loop.index }}" role="region" aria-hidden="true">{{ item.a | safe }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===== TERM DATES & FEES ===== #}
+<section id="fees" class="section section--cream" aria-labelledby="fees-heading">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header">
+      <span class="section-label">Term 3</span>
+      <h2 id="fees-heading" class="section-title">Key Dates &amp; Fees</h2>
+    </div>
+    <div class="grid grid-4 reveal" style="margin-bottom:var(--sp-xl);">
+      {% set dates = [
+        { label: 'Membership Opens', date: '1st August' },
+        { label: 'Enrolment Opens', date: '12 Noon, 24 Mar' },
+        { label: 'Early Bird Ends', date: '7th April' },
+        { label: 'Term 3 Starts', date: '21&ndash;23 April' }
+      ] %}
+      {% for d in dates %}
+      <div class="card" style="text-align:center;padding:var(--sp-lg);">
+        <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--clr-stone);margin-bottom:var(--sp-xs);">{{ d.label }}</p>
+        <p style="font-family:var(--ff-display);font-size:1.15rem;font-weight:700;color:var(--clr-maroon-deep);">{{ d.date | safe }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="accordion reveal">
+      {% set feeItems = [
+        { q: 'Member fees (8-week term)', a: '<p><strong>Full:</strong> Early Bird &pound;108 / Standard &pound;120</p><p><strong>Concession:</strong> Early Bird &pound;83 / Standard &pound;95</p>' },
+        { q: 'Non-member fees (8-week term)', a: '<p><strong>Full:</strong> Early Bird &pound;129 / Standard &pound;142</p><p><strong>Concession:</strong> Early Bird &pound;96 / Standard &pound;109</p>' },
+        { q: 'Daytime Song Session fees', a: '<p><strong>Member Full:</strong> EB &pound;80 / Std &pound;93 &nbsp;|&nbsp; <strong>Conc:</strong> EB &pound;60 / Std &pound;73</p><p><strong>Non-Member Full:</strong> EB &pound;102 / Std &pound;115 &nbsp;|&nbsp; <strong>Conc:</strong> EB &pound;74 / Std &pound;85</p>' },
+        { q: 'Mixed Instrument 3D fees', a: '<p><strong>Member Full:</strong> EB &pound;59 / Std &pound;63 &nbsp;|&nbsp; <strong>Conc:</strong> EB &pound;47 / Std &pound;51</p><p><strong>Non-Member Full:</strong> EB &pound;70 / Std &pound;74 &nbsp;|&nbsp; <strong>Conc:</strong> EB &pound;53 / Std &pound;55</p>' }
+      ] %}
+      {% for item in feeItems %}
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="fee-{{ loop.index }}">{{ item.q }}</button>
+        <div class="accordion-panel" id="fee-{{ loop.index }}" role="region" aria-hidden="true">{{ item.a | safe }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    <p style="text-align:center;margin-top:var(--sp-lg);font-size:0.85rem;color:var(--clr-stone);">Concession: students, pensioners receiving state pension, benefits recipients, jobseekers, unwaged (e.g. carer, stay-at-home parent). If you cannot afford fees, please contact the office in confidence.</p>
+    <div style="text-align:center;margin-top:var(--sp-lg);">
+      <a href="https://www.scotsmusic.org/sign-in-3/" class="btn btn-primary">Enrol Now</a>
+    </div>
+  </div>
+</section>
+
+{# ===== CLASS FAQ ===== #}
+<section id="classfaq" class="section section--white" aria-labelledby="classfaq-heading">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header">
+      <span class="section-label">Questions</span>
+      <h2 id="classfaq-heading" class="section-title">Class FAQ</h2>
+    </div>
+    <div class="accordion reveal">
+      {% set classFaqs = [
+        { q: 'Do I need to read music?', a: 'No. SMG encourages learning by ear. Tutors teach slowly and share music via recordings, photocopies or cloud storage.' },
+        { q: 'What if the class is too fast or slow?', a: 'You can transfer to another level where spaces allow. Speak to your tutor in the first week or two. Fiddle and guitar classes run on the same night for this purpose.' },
+        { q: 'Which level should I join if I learnt classically?', a: 'Check the class descriptions, then speak to your tutor in the first week. All fiddle and guitar classes run on the same night so you can easily switch.' },
+        { q: 'What instruments suit a mixed class?', a: 'Any acoustic instrument that can play in a range of keys. Some classes also welcome smallpipes, whistles, moothies, bodhrans etc.' },
+        { q: 'What is the easiest instrument to learn?', a: 'It depends on your experience, but ukulele and whistle are good starter instruments for those new to music.' },
+        { q: 'Where can I hire or buy an instrument?', a: 'Contact the office &mdash; we can usually suggest places, and some of our tutors are instrument makers.' },
+        { q: 'Can I bring a carer or support person?', a: 'Where practical, yes &mdash; but discuss with the office in advance for fire safety and space reasons.' },
+        { q: 'Can I bring my child?', a: 'Classes are for adults aged 18+. Family members are welcome at end-of-term events. The Edinburgh Youth Gaitherin runs workshops for ages 9&ndash;18.' },
+        { q: 'Where can I meet other musicians?', a: 'Come to any of our classes, or join one of the many regular pub sessions around Edinburgh.' }
+      ] %}
+      {% for faq in classFaqs %}
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="cfaq-{{ loop.index }}">{{ faq.q | safe }}</button>
+        <div class="accordion-panel" id="cfaq-{{ loop.index }}" role="region" aria-hidden="true"><p>{{ faq.a | safe }}</p></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===== TRAD MUSIC DIRECTORY ===== #}
+<section id="directory" class="section section--cream" aria-labelledby="dir-heading">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header">
+      <span class="section-label">Resources</span>
+      <h2 id="dir-heading" class="section-title">Traditional Music Directory</h2>
+      <p class="section-subtitle">Links to the wider world of traditional music and song in Edinburgh and beyond.</p>
+    </div>
+    <div class="grid grid-2 reveal">
+      <div class="info-category">
+        <h3>Edinburgh Folk Clubs</h3>
+        <div class="info-list">
+          <a href="https://www.efc1973.com/">Edinburgh Folk Club</a>
+          <a href="https://leithfolkclub.com/">Leith Folk Club</a>
+          <a href="https://www.balernofolkclub.org.uk/">Balerno Folk Club</a>
+          <a href="https://nittenfolk.com/">Nitten Folk Club</a>
+        </div>
+      </div>
+      <div class="info-category">
+        <h3>Festivals</h3>
+        <div class="info-list">
+          <a href="https://edinburghtradfest.com/">Edinburgh TradFest</a>
+          <a href="https://www.scotsfiddlefestival.com/">Scots Fiddle Festival</a>
+          <a href="https://www.harpfestival.co.uk/">Edinburgh Harp Festival</a>
+          <a href="http://flutefling.scot/">Flute Fling</a>
+        </div>
+      </div>
+      <div class="info-category">
+        <h3>Singing Groups</h3>
+        <div class="info-list">
+          <a href="https://www.castlechorus.co.uk/">Castle Chorus</a>
+          <a href="http://sangstream.org.uk/">Sangstream</a>
+          <a href="https://www.edinburghgaelicchoir.co.uk/">Edinburgh Gaelic Choir</a>
+        </div>
+      </div>
+      <div class="info-category">
+        <h3>Organisations</h3>
+        <div class="info-list">
+          <a href="https://www.tmsa.scot/">TMSA</a>
+          <a href="https://tracscotland.org/">TRACS</a>
+          <a href="https://projects.handsupfortrad.scot/handsupfortrad/">Hands up for Trad</a>
+          <a href="https://www.traditionalmusicforum.org/">Trad Music Forum</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

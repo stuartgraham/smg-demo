@@ -1,0 +1,108 @@
+{% extends "templates/base.njk" %}
+{% set description = "Buy Scots Music Group tune books, song books, CDs and branded clothing. Support our charity with every purchase." %}
+{% set canonical = "shop.html" %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1>Shop</h1>
+    <p>Tune books, song books, CDs and branded clothing. Every purchase supports our charity.</p>
+  </div>
+</div>
+
+<section class="section section--cream section--compact">
+  <div class="container" style="background:var(--clr-white);border:1px solid var(--clr-border);border-radius:var(--radius-lg);padding:var(--sp-lg);text-align:center;">
+    <p style="font-size:0.9rem;color:var(--clr-ink-soft);">SMG members get a discount. Enter code <strong style="color:var(--clr-maroon);">SMGMEM2425</strong> at checkout.</p>
+  </div>
+</section>
+
+{# ===== TUNE & SONG BOOKS ===== #}
+<section class="section section--cream" aria-labelledby="books-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Publications</span>
+      <h2 id="books-heading" class="section-title">Tune &amp; Song Books</h2>
+    </div>
+    <div class="grid grid-4">
+      {% set books = [
+        { name: 'Session Tunes Book 1', print: '&pound;6', digital: '&pound;4' },
+        { name: 'Session Tunes Book 2', print: '&pound;6', digital: '&pound;4' },
+        { name: 'Session Tunes Book 3', print: '&pound;6', digital: '&pound;4' },
+        { name: '50 Favourite Scots Songs', print: '&pound;6', digital: '&pound;4' },
+        { name: '50 Mair Favourite Scots Songs', print: '&pound;6', digital: '&pound;4' }
+      ] %}
+      {% for book in books %}
+      <div class="card product-card reveal">
+        <div class="product-icon" aria-hidden="true">&#128214;</div>
+        <div class="card-body">
+          <h3>{{ book.name }}</h3>
+          <p style="font-size:0.8rem;color:var(--clr-stone);margin-bottom:var(--sp-sm);">Print {{ book.print | safe }} &bull; Digital {{ book.digital | safe }}</p>
+          <a href="https://www.scotsmusic.org/smg-store/" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">Buy</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===== CDS ===== #}
+<section class="section section--white section--compact" aria-labelledby="cds-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Recordings</span>
+      <h2 id="cds-heading" class="section-title">CDs</h2>
+    </div>
+    <div class="grid grid-4">
+      {% for i in [1, 2] %}
+      <div class="card product-card reveal">
+        <div class="product-icon" aria-hidden="true">&#128191;</div>
+        <div class="card-body">
+          <h3>Session Tunes {{ i }} CD</h3>
+          <div class="product-price">&pound;5</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===== CLOTHING ===== #}
+<section class="section section--cream" aria-labelledby="clothing-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Merch</span>
+      <h2 id="clothing-heading" class="section-title">Clothing</h2>
+      <p class="section-subtitle">SMG branded t-shirts and hoodies. Each purchase contributes to our work.</p>
+    </div>
+    <div class="grid grid-3 reveal">
+      <div class="card product-card">
+        <div class="product-icon" aria-hidden="true">&#129509;</div>
+        <div class="card-body">
+          <h3>Hoodies</h3>
+          <div class="product-price">&pound;23.99</div>
+          <p style="margin-top:var(--sp-xs);">Long logo, various sizes</p>
+        </div>
+      </div>
+      <div class="card product-card">
+        <div class="product-icon" aria-hidden="true">&#128085;</div>
+        <div class="card-body">
+          <h3>T-Shirts</h3>
+          <div class="product-price">From &pound;17.99</div>
+          <p style="margin-top:var(--sp-xs);">Short &amp; long logo, men&rsquo;s &amp; women&rsquo;s</p>
+        </div>
+      </div>
+      <div class="card product-card">
+        <div class="product-icon" aria-hidden="true">&#128084;</div>
+        <div class="card-body">
+          <h3>Shirts</h3>
+          <div class="product-price">&pound;19.99</div>
+          <p style="margin-top:var(--sp-xs);">Logo shirts, various sizes</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:var(--sp-xl);">
+      <a href="https://www.scotsmusic.org/smg-store/" class="btn btn-primary">Visit Full Shop</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

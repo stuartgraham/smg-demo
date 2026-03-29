@@ -1,0 +1,79 @@
+{% extends "templates/base.njk" %}
+{% set description = "Scots Music Group community projects, affiliated groups, Cafe Ceilidh, Inspire, Big Folk Band and the wider SMG family in Edinburgh." %}
+{% set canonical = "community.html" %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1>Community</h1>
+    <p>Projects, affiliated groups, and the wider SMG family taking traditional music out into Edinburgh.</p>
+  </div>
+</div>
+
+<section class="section section--cream" aria-labelledby="projects-heading">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header">
+      <span class="section-label">SMG Projects</span>
+      <h2 id="projects-heading" class="section-title">Our community work</h2>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:var(--sp-xl);">
+      <div class="card-body">
+        <h3>Caf&eacute; Ceilidh</h3>
+        <p>A friendly afternoon of traditional music, song, poetry and story at The Scottish Storytelling Centre, 2&ndash;4pm. Free, un-ticketed, all welcome.</p>
+        <p style="margin-top:var(--sp-md);font-weight:600;color:var(--clr-maroon-deep);">Upcoming dates: Tuesday 17th March &bull; Tuesday 5th May 2026</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:var(--sp-xl);">
+      <div class="card-body">
+        <h3>Big Folk Band</h3>
+        <p>A 50-piece folk ensemble led by tutors Sarah Northcott and Beth Clarke. Fiddles, accordions, guitars, flutes, whistles, smallpipes, cello, double bass, percussion and more.</p>
+        <p style="margin-top:var(--sp-sm);font-size:0.88rem;color:var(--clr-stone);">The band is currently full with a waiting list. Rehearsal dates 2026: 14 Feb, 14 Mar, 18 Apr, 23 May, 20 Jun.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:var(--sp-xl);">
+      <div class="card-body">
+        <h3>Inspire (2010&ndash;2018)</h3>
+        <p>SMG partnered with homeless and mental health charities to offer music participation. Over 8,000 attendances, with participants creating and performing their own music. <a href="https://scotsmusic.org/learning-and-celebrating/">Read more</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--white" aria-labelledby="affiliated-heading">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header">
+      <span class="section-label">Affiliated Groups</span>
+      <h2 id="affiliated-heading" class="section-title">Groups who raise funds for SMG</h2>
+    </div>
+    <div class="grid grid-2 reveal">
+      <div class="card"><div class="card-body">
+        <h3>Ceilidh Caleerie</h3>
+        <p>Grew from SMG&rsquo;s Wednesday playing-for-dancing class. They play for community and charity ceilidhs with full calling and their own PA. <a href="https://ceilidhcaleeriedanceband.wordpress.com/">Visit site</a>.</p>
+      </div></div>
+      <div class="card"><div class="card-body">
+        <h3>Nigel&rsquo;s All Stars</h3>
+        <p>Members of a mixed instrument class who take tunes to day care centres, hospitals and community groups since 2010. Proceeds donated to SMG.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--cream section--compact" aria-labelledby="family-heading">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header">
+      <span class="section-label">The Wider Family</span>
+      <h2 id="family-heading" class="section-title">Independent groups from SMG</h2>
+      <p class="section-subtitle">Groups that began within SMG and have since become independent projects.</p>
+    </div>
+    <div class="grid grid-3 reveal" style="text-align:center;">
+      {% set family = ['Sangstream', 'Scots Fiddle Festival', 'Scots Moothie Group', 'String Circle Workshops', 'Linten Adie', 'Edinburgh Mandolin &amp; Guitar Orchestra', 'Auld Spice Ceilidh Band'] %}
+      {% for name in family %}
+      <div class="card" style="padding:var(--sp-lg);"><p style="font-weight:600;color:var(--clr-maroon-deep);">{{ name | safe }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

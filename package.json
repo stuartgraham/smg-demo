@@ -1,0 +1,17 @@
+{
+  "name": "smg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "node build.js && npx http-server dist -p 3847 -c-1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "nunjucks": "^3.2.4"
+  }
+}

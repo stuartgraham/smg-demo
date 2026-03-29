@@ -1,0 +1,57 @@
+{% extends "templates/base.njk" %}
+{% set description = "Donate to Scots Music Group. Gift Aid your donation to make it worth 25% more. Support traditional Scottish music classes and community events in Edinburgh." %}
+{% set canonical = "donate.html" %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1>Donate &amp; <em>Gift Aid</em></h1>
+    <p>Help us keep traditional Scottish music alive in Edinburgh. Every donation makes a difference.</p>
+  </div>
+</div>
+
+<section class="section section--cream" aria-labelledby="donate-heading">
+  <div class="container" style="max-width:800px;">
+    <div class="grid grid-2 reveal">
+      <div class="card">
+        <div class="card-body">
+          <h2 id="donate-heading" style="font-family:var(--ff-display);font-size:1.5rem;font-weight:700;color:var(--clr-maroon-deep);margin-bottom:var(--sp-md);">Donate today</h2>
+          <p style="margin-bottom:var(--sp-md);">SMG is a self-sustaining charity. Your donations help us offer discounts for concession holders, run accessible events, and develop community projects.</p>
+          <h3 style="font-size:0.95rem;margin-bottom:var(--sp-sm);">Ways to donate</h3>
+          <ul style="list-style:disc;padding-left:var(--sp-lg);">
+            <li style="margin-bottom:var(--sp-xs);font-size:0.9rem;color:var(--clr-ink-soft);">Include a donation when enrolling online</li>
+            <li style="margin-bottom:var(--sp-xs);font-size:0.9rem;color:var(--clr-ink-soft);">Via PayPal (credit/debit card or PayPal account)</li>
+            <li style="margin-bottom:var(--sp-xs);font-size:0.9rem;color:var(--clr-ink-soft);">Cash or cheque at the office</li>
+            <li style="margin-bottom:var(--sp-xs);font-size:0.9rem;color:var(--clr-ink-soft);">Bank transfer &mdash; <a href="mailto:admin@scotsmusic.org">contact us</a> for details</li>
+            <li style="font-size:0.9rem;color:var(--clr-ink-soft);">Cheque to: Scots Music Group, Eric Liddell Community, 15 Morningside Road, EH10 4DP</li>
+          </ul>
+          <div style="margin-top:var(--sp-lg);">
+            <a href="https://www.scotsmusic.org/donations-and-gift-aid/" class="btn btn-primary" style="width:100%;justify-content:center;">Donate via PayPal</a>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="border-color:var(--clr-amber);">
+        <div style="background:var(--clr-amber);padding:var(--sp-sm) var(--sp-lg);">
+          <span style="font-size:0.75rem;font-weight:700;color:var(--clr-maroon-deep);text-transform:uppercase;letter-spacing:0.06em;">Worth 25% more</span>
+        </div>
+        <div class="card-body">
+          <h3 style="font-family:var(--ff-display);font-size:1.4rem;">Gift Aid</h3>
+          <p style="margin-bottom:var(--sp-md);">If you&rsquo;re a UK taxpayer, Gift Aid lets us claim an extra 25p for every &pound;1 you donate &mdash; at no extra cost to you.</p>
+          <p style="font-size:0.88rem;margin-bottom:var(--sp-md);color:var(--clr-ink-soft);">For every &pound;10 you give, SMG receives &pound;12.50 from the Treasury.</p>
+          <h3 style="font-size:0.95rem;margin-bottom:var(--sp-sm);">How to add Gift Aid</h3>
+          <ul style="list-style:disc;padding-left:var(--sp-lg);">
+            <li style="margin-bottom:var(--sp-xs);font-size:0.9rem;color:var(--clr-ink-soft);">Tick the Gift Aid box when enrolling online</li>
+            <li style="margin-bottom:var(--sp-xs);font-size:0.9rem;color:var(--clr-ink-soft);">Complete the online Gift Aid form</li>
+            <li style="font-size:0.9rem;color:var(--clr-ink-soft);">For cash/cheque/bank transfer, complete a hard copy form</li>
+          </ul>
+          <div style="margin-top:var(--sp-lg);display:flex;flex-direction:column;gap:var(--sp-sm);">
+            <a href="https://www.scotsmusic.org/donations-and-gift-aid/" class="btn btn-secondary" style="justify-content:center;">Gift Aid Form Online</a>
+            <a href="https://www.scotsmusic.org/donations-and-gift-aid/smg-gift-aid-declaration-single-2020/" class="btn btn-outline btn-sm" style="justify-content:center;">Single Donation Form</a>
+            <a href="https://www.scotsmusic.org/donations-and-gift-aid/smg-gift-aid-declaration-multiple-2020/" class="btn btn-outline btn-sm" style="justify-content:center;">Multiple Donations Form</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

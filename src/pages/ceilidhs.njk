@@ -1,0 +1,128 @@
+{% extends "templates/base.njk" %}
+{% set description = "Buy tickets for Scots Music Group ceilidhs in Edinburgh. Live bands, traditional dancing, all ages welcome. Ceilidh dates, tickets, FAQs and venue information." %}
+{% set canonical = "ceilidhs.html" %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1>Ceilidhs</h1>
+    <p>Lively, friendly, informal and fun for all ages. Live bands, a caller to guide the dances, and a warm welcome whether you come alone or with a party.</p>
+  </div>
+</div>
+
+{# ===== TICKETS — Revenue-critical, top billing ===== #}
+<section id="tickets" class="section section--warm" aria-labelledby="tickets-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Buy Tickets</span>
+      <h2 id="tickets-heading" class="section-title">Upcoming Ceilidhs</h2>
+      <p class="section-subtitle">Our ceilidhs often sell out &mdash; please buy in advance to be sure of entry!</p>
+    </div>
+    <div class="grid grid-3">
+      {% set ceilidhs = [
+        { date: 'Sat 28 March 2026', band: 'Portobello Ceilidh Band', venue: "St Bride's Centre, Orwell Terrace", time: 'Doors 7pm, dancing 7:30&ndash;11pm', price_full: '&pound;12', price_conc: '&pound;8', price_door: '&pound;15/&pound;10' },
+        { date: 'Sat 25 April 2026', band: "Bella McNab's Dance Band", venue: "St Bride's Centre, Orwell Terrace", time: 'Doors 7pm, dancing 7:30&ndash;11pm', price_full: '&pound;12', price_conc: '&pound;8', price_door: '&pound;15/&pound;10' },
+        { date: 'Sat 30 May 2026', band: 'Sensational Jimi Shandrix Experience', venue: "St Bride's Centre, Orwell Terrace", time: 'Doors 7pm, dancing 7:30&ndash;11pm', price_full: '&pound;12', price_conc: '&pound;8', price_door: '&pound;15/&pound;10' }
+      ] %}
+      {% for c in ceilidhs %}
+      <div class="event-card reveal{% if loop.index > 1 %} reveal-d{{ loop.index - 1 }}{% endif %}">
+        <div class="event-card-header">
+          <span class="event-card-date">{{ c.date }}</span>
+          <span class="event-card-badge">On Sale</span>
+        </div>
+        <div class="event-card-body">
+          <h3>{{ c.band }}</h3>
+          <p style="margin-bottom:var(--sp-md);">{{ c.venue }}</p>
+          <div class="event-card-meta">
+            <span>{{ c.time | safe }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-sm);margin-top:var(--sp-md);font-size:0.8rem;">
+            <div style="background:var(--clr-cream);border-radius:var(--radius);padding:var(--sp-sm) var(--sp-md);">
+              <div style="color:var(--clr-stone);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;">Online</div>
+              <div style="font-weight:700;color:var(--clr-maroon-deep);">{{ c.price_full | safe }} / {{ c.price_conc | safe }}</div>
+            </div>
+            <div style="background:var(--clr-cream);border-radius:var(--radius);padding:var(--sp-sm) var(--sp-md);">
+              <div style="color:var(--clr-stone);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;">On the door</div>
+              <div style="font-weight:700;color:var(--clr-maroon-deep);">{{ c.price_door | safe }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="event-card-footer">
+          <a href="https://www.scotsmusic.org/ceilidhs/" class="btn btn-primary" style="width:100%;justify-content:center;">Buy Tickets</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <p style="text-align:center;margin-top:var(--sp-lg);font-size:0.85rem;color:var(--clr-stone);">Concession: students, pensioners, benefits, jobseekers, unwaged. Children 5&ndash;16 at concession rate, under 5s free (ticket required).</p>
+  </div>
+</section>
+
+{# ===== WHAT TO EXPECT ===== #}
+<section class="section section--cream section--compact" aria-labelledby="expect-heading">
+  <div class="container">
+    <h2 id="expect-heading" class="section-title" style="text-align:center;margin-bottom:var(--sp-xl);">What to expect</h2>
+    <div class="grid grid-3 reveal">
+      <div class="card"><div class="card-body" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#128131;</div>
+        <h3>No experience needed</h3>
+        <p>A caller walks you through every dance. Friendly folk will help you along.</p>
+      </div></div>
+      <div class="card"><div class="card-body" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#127863;</div>
+        <h3>Bar &amp; raffle</h3>
+        <p>Licensed bar on site. Fund-raising raffle during the break. Prize donations welcome!</p>
+      </div></div>
+      <div class="card"><div class="card-body" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#9855;</div>
+        <h3>Accessible venue</h3>
+        <p>St Bride&rsquo;s Centre is accessible. Staff will open the cafe door for wheelchair access.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+{# ===== FAQS ===== #}
+<section id="faqs" class="section section--white" aria-labelledby="faq-heading">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header">
+      <span class="section-label">Questions</span>
+      <h2 id="faq-heading" class="section-title">Ceilidh FAQs</h2>
+    </div>
+    <div class="accordion reveal">
+      {% set faqs = [
+        { q: 'How much are the tickets?', a: 'Online advance tickets are &pound;12 full and &pound;8 concession. On the door: &pound;15 full and &pound;10 concession.' },
+        { q: 'What are the timings?', a: 'Doors open at 7pm. Dancing runs 7:30pm to 11pm with a break around 9:15pm for the raffle.' },
+        { q: 'Can I come on my own?', a: 'Absolutely! No need to bring a partner. Our ceilidhs are relaxed and welcoming &mdash; we&rsquo;ll soon have you birling on the dance floor.' },
+        { q: 'I&rsquo;ve never been to a ceilidh &mdash; will I know what to do?', a: 'Our bands have experienced callers who walk you through each dance before it starts. No experience needed.' },
+        { q: 'What should I wear?', a: 'Informal &mdash; wear something comfortable. Layers are a good idea as it gets warm. Sensible shoes recommended, not heels!' },
+        { q: 'Can I bring children?', a: 'Children are welcome. Ages 5&ndash;16 are charged at concession rate, under 5s free (but need a ticket). Children should not be in the bar area unsupervised.' },
+        { q: 'Can I reserve a table?', a: 'For groups of 10+ we can reserve tables until 8pm. Email the SMG office at least 7 days before.' },
+        { q: 'Can I get a refund?', a: 'Unfortunately ceilidh tickets are non-refundable &mdash; they are also fundraising events for SMG. You are welcome to resell tickets yourself.' },
+        { q: 'What does &ldquo;Online Sale Ended&rdquo; mean?', a: 'If you see this after 7pm on ceilidh night, online sales have closed. There may be tickets at the venue from 7pm &mdash; check our Facebook page.' }
+      ] %}
+      {% for faq in faqs %}
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-{{ loop.index }}" id="faq-btn-{{ loop.index }}">{{ faq.q | safe }}</button>
+        <div class="accordion-panel" id="faq-{{ loop.index }}" role="region" aria-labelledby="faq-btn-{{ loop.index }}" aria-hidden="true">
+          <p>{{ faq.a | safe }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===== VENUE ===== #}
+<section id="venue" class="section section--cream section--compact" aria-labelledby="venue-heading">
+  <div class="container" style="max-width:800px;text-align:center;">
+    <h2 id="venue-heading" class="section-title" style="margin-bottom:var(--sp-lg);">Venue</h2>
+    <div class="card reveal" style="overflow:hidden;">
+      <div class="card-body">
+        <h3>St Bride&rsquo;s Centre</h3>
+        <p>10 Orwell Terrace, Edinburgh EH11 2DZ</p>
+        <p style="margin-top:var(--sp-sm);font-size:0.85rem;color:var(--clr-stone);">Accessible venue. Centre staff will open the cafe door for wheelchair access.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

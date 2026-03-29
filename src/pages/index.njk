@@ -1,0 +1,159 @@
+{% extends "templates/base.njk" %}
+
+{% block content %}
+{# ===== HERO — Single clear CTA, decluttered ===== #}
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero-inner container" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2xl);align-items:center;">
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:var(--sp-sm);background:rgba(200,146,60,0.12);border:1px solid rgba(200,146,60,0.25);border-radius:99px;padding:3px 14px;font-size:0.75rem;color:var(--clr-amber-light);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:var(--sp-lg);">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--clr-amber-light);animation:pulse 2s infinite;" aria-hidden="true"></span>
+        Edinburgh&rsquo;s Traditional Music Community
+      </div>
+      <h1 id="hero-heading" style="font-family:var(--ff-display);font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:700;color:var(--clr-white);line-height:1.12;letter-spacing:-0.02em;margin-bottom:var(--sp-lg);">Learn <em style="font-style:italic;color:var(--clr-amber-light);">traditional Scottish music</em> in the heart of Edinburgh</h1>
+      <p style="font-size:1.05rem;color:var(--clr-stone-light);line-height:1.7;margin-bottom:var(--sp-xl);max-width:48ch;">Classes for adults in fiddle, guitar, accordion, song, whistle, smallpipes, banjo and more. Plus monthly ceilidhs from Scotland&rsquo;s friendliest music charity.</p>
+      <div style="display:flex;gap:var(--sp-md);flex-wrap:wrap;">
+        <a href="/classes.html" class="btn btn-primary btn-lg">Enrol for Term 3 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="/ceilidhs.html" class="btn btn-outline-light btn-lg">Next Ceilidh &mdash; 28 Mar</a>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-md);" aria-label="Quick links">
+      <a href="/ceilidhs.html" class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);padding:var(--sp-lg);text-decoration:none;">
+        <div style="font-size:1.8rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#127926;</div>
+        <h3 style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--clr-white);margin-bottom:2px;">Ceilidhs</h3>
+        <p style="font-size:0.78rem;color:var(--clr-stone-light);">Live bands, dancing, all welcome</p>
+      </a>
+      <a href="/donate.html" class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);padding:var(--sp-lg);text-decoration:none;">
+        <div style="font-size:1.8rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#10084;</div>
+        <h3 style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--clr-white);margin-bottom:2px;">Support Us</h3>
+        <p style="font-size:0.78rem;color:var(--clr-stone-light);">Donate or Gift Aid</p>
+      </a>
+      <a href="/community.html" class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);padding:var(--sp-lg);text-decoration:none;">
+        <div style="font-size:1.8rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#127932;</div>
+        <h3 style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--clr-white);margin-bottom:2px;">Community</h3>
+        <p style="font-size:0.78rem;color:var(--clr-stone-light);">Sessions &amp; social events</p>
+      </a>
+      <a href="/shop.html" class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);padding:var(--sp-lg);text-decoration:none;">
+        <div style="font-size:1.8rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#127931;</div>
+        <h3 style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--clr-white);margin-bottom:2px;">Shop</h3>
+        <p style="font-size:0.78rem;color:var(--clr-stone-light);">Tune books, CDs &amp; merch</p>
+      </a>
+    </div>
+  </div>
+  <style>@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}@media(max-width:1024px){.hero-inner{grid-template-columns:1fr !important;}}@media(max-width:480px){.hero-inner div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr !important;}}</style>
+</section>
+
+{# ===== UPCOMING EVENTS — Revenue-critical, top billing ===== #}
+<section class="section section--warm" aria-labelledby="events-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Upcoming Events</span>
+      <h2 id="events-heading" class="section-title">Get your tickets</h2>
+      <p class="section-subtitle">Our ceilidhs and events are how we keep the lights on. They sell out fast!</p>
+    </div>
+    <div class="grid grid-3">
+      {% set events = [
+        { date: 'Sat 28 March', band: 'Portobello Ceilidh Band', venue: "St Bride's Centre", time: 'Doors 7pm', price: 'From &pound;8' },
+        { date: 'Sat 25 April', band: "Bella McNab's Dance Band", venue: "St Bride's Centre", time: 'Doors 7pm', price: 'From &pound;8' },
+        { date: 'Sat 30 May', band: 'Sensational Jimi Shandrix Experience', venue: "St Bride's Centre", time: 'Doors 7pm', price: 'From &pound;8' }
+      ] %}
+      {% for event in events %}
+      <div class="event-card reveal{% if loop.index > 1 %} reveal-d{{ loop.index - 1 }}{% endif %}">
+        <div class="event-card-header">
+          <span class="event-card-date">{{ event.date }}</span>
+          <span class="event-card-badge">{{ event.price | safe }}</span>
+        </div>
+        <div class="event-card-body">
+          <h3>Ceilidh with {{ event.band }}</h3>
+          <div class="event-card-meta">
+            <span>{{ event.venue }}</span>
+            <span>{{ event.time }}</span>
+          </div>
+        </div>
+        <div class="event-card-footer">
+          <a href="/ceilidhs.html" class="btn btn-primary" style="width:100%;justify-content:center;">Buy Tickets</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===== CLASSES — Clean grid ===== #}
+<section class="section section--cream" aria-labelledby="classes-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our Classes</span>
+      <h2 id="classes-heading" class="section-title">Find your instrument</h2>
+      <p class="section-subtitle">All levels, taught by ear in a relaxed environment. Three terms per year.</p>
+    </div>
+    <div class="grid grid-3" style="margin-bottom:var(--sp-xl);">
+      {% set instruments = [
+        { name: 'Fiddle', icon: '&#127931;', when: 'Thu evenings' },
+        { name: 'Guitar', icon: '&#127928;', when: 'Thu evenings' },
+        { name: 'Accordion', icon: '&#127929;', when: 'Wed evenings' },
+        { name: 'Song', icon: '&#127908;', when: 'Tue &amp; Thu' },
+        { name: 'Whistle &amp; Flute', icon: '&#127925;', when: 'Thu evenings' },
+        { name: 'Smallpipes', icon: '&#127927;', when: 'Wed evenings' },
+        { name: 'Banjo', icon: '&#129685;', when: 'Short courses' },
+        { name: 'Ukulele', icon: '&#127930;', when: 'Thu evenings' },
+        { name: 'Mixed Instrument', icon: '&#127923;', when: 'Tue, Wed &amp; Thu' }
+      ] %}
+      {% for inst in instruments %}
+      <a href="/classes.html" class="card reveal" style="text-align:center;padding:var(--sp-xl) var(--sp-lg);text-decoration:none;position:relative;overflow:hidden;" aria-label="{{ inst.name }} classes">
+        <div style="font-size:2.2rem;margin-bottom:var(--sp-sm);" aria-hidden="true">{{ inst.icon | safe }}</div>
+        <h3 style="font-family:var(--ff-display);font-size:1.15rem;font-weight:700;color:var(--clr-maroon-deep);margin-bottom:2px;">{{ inst.name | safe }}</h3>
+        <p style="font-size:0.8rem;color:var(--clr-stone);">{{ inst.when | safe }}</p>
+      </a>
+      {% endfor %}
+    </div>
+    <div style="text-align:center;">
+      <a href="/classes.html" class="btn btn-secondary">View All Classes &amp; Enrol</a>
+    </div>
+  </div>
+</section>
+
+{# ===== NEWS — Compact ===== #}
+<section class="section section--white section--compact" aria-labelledby="news-heading">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-xl);flex-wrap:wrap;gap:var(--sp-md);">
+      <div>
+        <span class="section-label">Latest</span>
+        <h2 id="news-heading" class="section-title" style="text-align:left;">News</h2>
+      </div>
+      <a href="/news.html" class="btn btn-outline btn-sm">All News</a>
+    </div>
+    <div class="grid grid-3">
+      {% set posts = [
+        { title: 'Term 3 Now Open For Booking', date: 'Mar 2026', excerpt: 'Early Bird pricing is live! Book before April 7th and save. Short courses for Banjo and Playing For Dancing also available.' },
+        { title: 'AGM Sunday March 1st', date: 'Feb 2026', excerpt: 'The Annual General Meeting is at 2pm at Christ Church Centre, 6A Morningside Road.' },
+        { title: 'Mid Term Break', date: 'Feb 2026', excerpt: 'A reminder that this is our mid-term break for Term 2. All classes resume next week.' }
+      ] %}
+      {% for post in posts %}
+      <a href="/news.html" class="card reveal" style="text-decoration:none;display:flex;flex-direction:column;">
+        <div style="background:var(--clr-maroon);padding:var(--sp-sm) var(--sp-lg);">
+          <span style="font-size:0.7rem;color:var(--clr-amber-light);font-weight:500;text-transform:uppercase;letter-spacing:0.05em;">{{ post.date }}</span>
+        </div>
+        <div class="card-body" style="flex:1;">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===== DONATE CTA ===== #}
+<section class="section section--warm section--compact" aria-labelledby="support-heading">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--sp-xl);flex-wrap:wrap;">
+    <div style="max-width:55ch;">
+      <h2 id="support-heading" style="font-family:var(--ff-display);font-size:1.6rem;font-weight:700;color:var(--clr-maroon-deep);margin-bottom:var(--sp-sm);">Support Scots Music Group</h2>
+      <p style="color:var(--clr-stone);">We&rsquo;re a registered charity keeping traditional Scottish music alive. Your donations help us offer affordable classes and community events for everyone.</p>
+    </div>
+    <div style="display:flex;gap:var(--sp-md);flex-wrap:wrap;">
+      <a href="/donate.html" class="btn btn-primary">Donate &amp; Gift Aid</a>
+      <a href="/shop.html" class="btn btn-outline">Visit the Shop</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

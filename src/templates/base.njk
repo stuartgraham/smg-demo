@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | {{ site.name }}</title>
+  <meta name="description" content="{{ description | default('Scots Music Group offers traditional Scottish music and song classes for adults in Edinburgh. Join fiddle, guitar, accordion, whistle, song classes, plus monthly ceilidhs.') }}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="{{ site.url }}/{{ canonical | default('') }}">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ title }} | {{ site.name }}">
+  <meta property="og:description" content="{{ description | default('Traditional Scottish music classes for adults in Edinburgh. Plus monthly ceilidhs and community events.') }}">
+  <meta property="og:url" content="{{ site.url }}/{{ canonical | default('') }}">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:image" content="{{ site.url }}/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@scotsmusicgroup">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  {% block announcement %}
+  <div class="announcement" role="alert">
+    Term 3 opens for booking &mdash; <a href="/classes.html">Enrol now &amp; save with Early Bird pricing</a>
+  </div>
+  {% endblock %}
+
+  {% include "partials/header.njk" %}
+
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "partials/footer.njk" %}
+
+  <script>
+  (function(){
+    // Scroll reveal
+    var els = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+      }, {threshold:0.1, rootMargin:'0px 0px -30px 0px'});
+      els.forEach(function(el){ obs.observe(el); });
+    } else { els.forEach(function(el){ el.classList.add('visible'); }); }
+
+    // Mobile menu
+    var btn = document.querySelector('.menu-toggle');
+    if(btn) btn.addEventListener('click', function(){
+      var expanded = this.getAttribute('aria-expanded')==='true';
+      this.setAttribute('aria-expanded', !expanded);
+      document.getElementById('main-navigation').classList.toggle('open');
+    });
+
+    // Accordions
+    document.querySelectorAll('.accordion-trigger').forEach(function(t){
+      t.addEventListener('click', function(){
+        var expanded = this.getAttribute('aria-expanded')==='true';
+        this.setAttribute('aria-expanded', !expanded);
+        var panel = document.getElementById(this.getAttribute('aria-controls'));
+        if(panel) panel.setAttribute('aria-hidden', expanded);
+      });
+    });
+  })();
+  </script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

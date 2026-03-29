@@ -1,0 +1,74 @@
+name: Deploy Site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:      # manual trigger
+
+# Cancel in-flight deploys on new push
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: eu-west-2   # London — closest to Edinburgh
+
+permissions:
+  id-token: write         # OIDC
+  contents: read
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # Option A: OIDC (recommended, no long-lived keys)
+          # Set up an IAM Identity Provider for GitHub Actions
+          # and a role with the DeployPolicy attached.
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          # Option B: IAM user (fallback — set AWS_ACCESS_KEY_ID
+          # and AWS_SECRET_ACCESS_KEY as secrets instead)
+          # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync dist/ s3://${{ secrets.S3_BUCKET }} \
+            --delete \
+            --cache-control "public, max-age=86400" \
+            --exclude "*.html" \
+            --exclude "*.json"
+
+          # HTML and JSON get shorter cache (1 hour) so updates propagate faster
+          aws s3 sync dist/ s3://${{ secrets.S3_BUCKET }} \
+            --cache-control "public, max-age=3600" \
+            --include "*.html" \
+            --include "*.json" \
+            --content-type "text/html"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
