@@ -44,6 +44,57 @@ const site = {
   ]
 };
 
+const EVENTBRITE_PUBLIC_TOKEN = 'K7TOD7V5RVEJDGZGICXM';
+
+const eventPages = [
+  {
+    src: 'pages/event.njk',
+    out: 'event/bella-mcnab.html',
+    data: {
+      pageId: 'event',
+      title: "TEST EVENT - Ceilidh with Bella McNab's Dance Band",
+      outputName: 'event/bella-mcnab.html',
+      eventData: {
+        eventbriteId: '1986172285773',
+        publicToken: EVENTBRITE_PUBLIC_TOKEN,
+        isTest: true,
+        title: "Ceilidh with Bella McNab's Dance Band",
+        subtitle: 'SCOTS MUSIC GRP CEILIDH 2026',
+        band: "Bella McNab's Dance Band",
+        dateFormatted: 'Saturday 25 April 2026',
+        timeFormatted: 'Doors 7pm, dancing 7:30\u201311pm',
+        startUTC: '2026-04-25T18:30:00Z',
+        heroImage: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=1200&q=80',
+        description: 'Book tickets for our ceilidh with Bella McNab\'s Dance Band at St Bride\'s Centre, Edinburgh.',
+        descriptionHtml: '<p>SCOTS MUSIC GRP CEILIDH 2026</p><p>Doors open at 7pm. Ceilidh starts at 7.30pm & finishes at 11pm.</p><p>Tickets purchased ONLINE in advance are £12 full / £8 concession and will be on the door for collection. Save money by buying in advance! Tickets on the night are £15 full / £10 concession (cash/card).</p><p>Concession rate applies to students, pensioners, people receiving benefits, jobseekers/unemployed, unwaged (e.g. carer, stay at home parent) and children aged 5 to 16. Children under 5 are free but ticketed so please purchase a free child ticket.</p>'
+      }
+    }
+  },
+  {
+    src: 'pages/event.njk',
+    out: 'event/jimi-shandrix.html',
+    data: {
+      pageId: 'event',
+      title: 'TEST EVENT - Ceilidh with Sensational Jimi Shandrix Experience',
+      outputName: 'event/jimi-shandrix.html',
+      eventData: {
+        eventbriteId: '1986172319875',
+        publicToken: EVENTBRITE_PUBLIC_TOKEN,
+        isTest: true,
+        title: 'Ceilidh with Sensational Jimi Shandrix Experience',
+        subtitle: 'SCOTS MUSIC GRP CEILIDH 2026',
+        band: 'Sensational Jimi Shandrix Experience',
+        dateFormatted: 'Saturday 30 May 2026',
+        timeFormatted: 'Doors 7pm, dancing 7:30\u201311pm',
+        startUTC: '2026-05-30T18:30:00Z',
+        heroImage: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&q=80',
+        description: 'Book tickets for our ceilidh with the Sensational Jimi Shandrix Experience at St Bride\'s Centre, Edinburgh.',
+        descriptionHtml: '<p>SCOTS MUSIC GRP CEILIDH 2026</p><p>Doors open at 7pm. Ceilidh starts at 7.30pm & ends at 11pm.</p><p>Tickets purchased online in advance are £12 full / £8 concession and will be on the door for collection. Save money by buying in advance! Full-price tickets on the night are £15 full / £10 concessions (cash/card).</p><p>Concession rate applies to students, pensioners, people receiving benefits, jobseekers/unemployed, unwaged (e.g. carer, stay at home parent) and children aged 5 to 16. Children under 5 are free but ticketed so please purchase a free child ticket.</p>'
+      }
+    }
+  }
+];
+
 const pages = [
   { src: 'pages/index.njk', out: 'index.html', data: { pageId: 'home', title: 'Traditional Music Classes & Ceilidhs in Edinburgh' } },
   { src: 'pages/classes.njk', out: 'classes.html', data: { pageId: 'classes', title: 'Classes' } },
@@ -54,6 +105,7 @@ const pages = [
   { src: 'pages/news.njk', out: 'news.html', data: { pageId: 'news', title: 'News' } },
   { src: 'pages/about.njk', out: 'about.html', data: { pageId: 'about', title: 'About Us' } },
   { src: 'pages/donate.njk', out: 'donate.html', data: { pageId: 'donate', title: 'Donate & Gift Aid' } },
+  ...eventPages,
 ];
 
 (async () => {
@@ -73,7 +125,10 @@ const pages = [
         sortClassName: true,
         sortAttributes: true,
       });
-      fs.writeFileSync(path.join(distDir, page.out), minified, 'utf-8');
+      const outPath = path.join(distDir, page.out);
+      const outDir = path.dirname(outPath);
+      if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(outPath, minified, 'utf-8');
       console.log(`  Built: ${page.out}`);
     } catch (err) {
       console.error(`  ERROR building ${page.out}:`, err.message);

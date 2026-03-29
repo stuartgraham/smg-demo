@@ -1,0 +1,297 @@
+{% extends "templates/base.njk" %}
+{% from "partials/icons.njk" import calendar, map_pin, clock, ticket, users, music_note, chevron_left, info_circle, alert_triangle, check_circle, external_link %}
+{% set description = eventData.description | default('Book tickets for Scots Music Group ceilidhs in Edinburgh.') %}
+{% set canonical = outputName %}
+
+{% block head %}
+<meta property="og:type" content="event">
+<meta property="og:start_time" content="{{ eventData.start.utc | default('') }}">
+<meta property="og:end_time" content="{{ eventData.end.utc | default('') }}">
+{% endblock %}
+
+{% block announcement %}
+{% if eventData.isTest %}
+<div class="announcement announcement--test" role="alert" style="background:#DC2626;color:#fff;font-weight:700;letter-spacing:0.05em;">
+  TEST EVENT &mdash; This is not a real event &mdash; for development purposes only
+</div>
+{% else %}
+<div class="announcement" role="alert">
+  {% if eventData.status == 'live' %}Tickets on sale now{% else %}Event {{ eventData.status }}{% endif %} &mdash; <a href="#eventbrite-widget">Book now</a>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <a href="/ceilidhs.html" style="display:inline-flex;align-items:center;gap:var(--sp-xs);color:var(--clr-amber-light);text-decoration:none;font-size:0.85rem;font-weight:500;margin-bottom:var(--sp-md);">
+      {{ chevron_left('icon-sm') }} Back to Ceilidhs
+    </a>
+    <h1 id="event-title">{{ eventData.title | default('Loading event...') }}</h1>
+    <p id="event-subtitle" style="color:var(--clr-stone-light);font-size:1.05rem;margin-top:var(--sp-sm);">
+      {{ eventData.subtitle | default('SCOTS MUSIC GRP CEILIDH 2026') }}
+    </p>
+  </div>
+</div>
+
+{# ===== EVENT HERO IMAGE ===== #}
+<section class="event-hero-image" aria-label="Event image">
+  <div class="container">
+    <div class="event-hero-image-inner" id="event-image-container">
+      <img src="{{ eventData.heroImage | default('https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=1200&q=80') }}" alt="{{ eventData.title }} ceilidh" id="event-hero-img" loading="eager" style="width:100%;height:100%;object-fit:cover;">
+      <div class="event-hero-image-overlay"></div>
+    </div>
+  </div>
+</section>
+
+{# ===== MAIN EVENT CONTENT ===== #}
+<section class="section">
+  <div class="container">
+    <div class="event-layout">
+      
+      {# ---- LEFT: Event Details ---- #}
+      <div class="event-details">
+        
+        <div class="event-meta-strip" id="event-meta">
+          <div class="event-meta-item">
+            <span class="event-meta-icon">{{ calendar('icon') }}</span>
+            <div>
+              <div class="event-meta-label">Date</div>
+              <div class="event-meta-value" id="event-date">{{ eventData.dateFormatted | default('Loading...') }}</div>
+            </div>
+          </div>
+          <div class="event-meta-item">
+            <span class="event-meta-icon">{{ clock('icon') }}</span>
+            <div>
+              <div class="event-meta-label">Time</div>
+              <div class="event-meta-value" id="event-time">{{ eventData.timeFormatted | default('Doors 7pm, dancing 7:30-11pm') }}</div>
+            </div>
+          </div>
+          <div class="event-meta-item">
+            <span class="event-meta-icon">{{ map_pin('icon') }}</span>
+            <div>
+              <div class="event-meta-label">Venue</div>
+              <div class="event-meta-value">St Bride's Centre, Orwell Terrace, Edinburgh</div>
+            </div>
+          </div>
+          <div class="event-meta-item">
+            <span class="event-meta-icon">{{ music_note('icon') }}</span>
+            <div>
+              <div class="event-meta-label">Band</div>
+              <div class="event-meta-value" id="event-band">{{ eventData.band | default('Loading...') }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="event-description" id="event-description">
+          {{ eventData.descriptionHtml | default('<p>Loading event details...</p>') | safe }}
+        </div>
+
+        <div class="event-tickets-panel" id="eventbrite-widget">
+          <h2>Buy Tickets</h2>
+          <div id="eventbrite-widget-container"></div>
+          <button id="eventbrite-widget-modal-trigger" type="button" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;margin-top:var(--sp-md);font-size:1.1rem;padding:1rem 2rem;">
+            {{ ticket('icon') }} Buy Tickets Now
+          </button>
+        </div>
+
+        <div class="event-extra-info">
+          <h3>Good to know</h3>
+          <div class="event-info-grid">
+            <div class="event-info-card">
+              <div class="event-info-card-icon">{{ check_circle('icon icon-lg') }}</div>
+              <h4>No experience needed</h4>
+              <p>A caller walks you through every dance. Friendly folk will help you along.</p>
+            </div>
+            <div class="event-info-card">
+              <div class="event-info-card-icon">{{ users('icon icon-lg') }}</div>
+              <h4>All ages welcome</h4>
+              <p>Children 5-16 at concession rate. Under 5s free (ticket required). Accessible venue.</p>
+            </div>
+            <div class="event-info-card">
+              <div class="event-info-card-icon">{{ info_circle('icon icon-lg') }}</div>
+              <h4>Bar &amp; raffle</h4>
+              <p>Licensed bar on site. Fundraising raffle during the break. No outside alcohol.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {# ---- RIGHT: Sidebar ---- #}
+      <aside class="event-sidebar">
+        
+        <div class="event-sidebar-card" id="event-countdown">
+          <div class="event-sidebar-card-header">
+            {{ calendar('icon') }} Event Countdown
+          </div>
+          <div class="event-sidebar-card-body">
+            <div id="countdown-display" class="countdown">
+              <div class="countdown-unit">
+                <span class="countdown-value" id="cd-days">--</span>
+                <span class="countdown-label">Days</span>
+              </div>
+              <div class="countdown-sep">:</div>
+              <div class="countdown-unit">
+                <span class="countdown-value" id="cd-hours">--</span>
+                <span class="countdown-label">Hours</span>
+              </div>
+              <div class="countdown-sep">:</div>
+              <div class="countdown-unit">
+                <span class="countdown-value" id="cd-mins">--</span>
+                <span class="countdown-label">Mins</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="event-sidebar-card">
+          <div class="event-sidebar-card-header">
+            {{ map_pin('icon') }} Venue
+          </div>
+          <div class="event-sidebar-card-body">
+            <h4>St Bride's Centre</h4>
+            <p>10 Orwell Terrace<br>Edinburgh EH11 2DZ</p>
+            <p style="margin-top:var(--sp-sm);font-size:0.8rem;color:var(--clr-stone);">Accessible venue. Staff will open the cafe door for wheelchair access.</p>
+            <a href="https://maps.google.com/?q=St+Brides+Centre+Edinburgh+Orwell+Terrace" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="margin-top:var(--sp-md);width:100%;justify-content:center;">
+              {{ external_link('icon-sm') }} Get Directions
+            </a>
+          </div>
+        </div>
+
+        <div class="event-sidebar-card">
+          <div class="event-sidebar-card-header">
+            {{ info_circle('icon') }} Ticket Info
+          </div>
+          <div class="event-sidebar-card-body">
+            <ul class="event-sidebar-list">
+              <li><strong>Online:</strong> Sales end at 6pm on the day</li>
+              <li><strong>On the door:</strong> Cash or card accepted</li>
+              <li><strong>Refunds:</strong> Non-refundable</li>
+              <li><strong>Proof:</strong> ID / proof of purchase may be required</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="event-sidebar-card event-sidebar-card--social">
+          <div class="event-sidebar-card-header">
+            Share this event
+          </div>
+          <div class="event-sidebar-card-body">
+            <div class="event-share-buttons">
+              <a href="#" id="share-facebook" class="event-share-btn" aria-label="Share on Facebook" target="_blank" rel="noopener">Facebook</a>
+              <a href="#" id="share-twitter" class="event-share-btn" aria-label="Share on X (Twitter)" target="_blank" rel="noopener">Twitter / X</a>
+              <a href="#" id="share-email" class="event-share-btn" aria-label="Share by email">Email</a>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
+<script>
+(function(){
+  var EVENT_ID = '{{ eventData.eventbriteId }}';
+  var TOKEN = '{{ eventData.publicToken }}';
+  var EVENT_START = '{{ eventData.startUTC | default("") }}';
+  var PAGE_URL = window.location.href;
+  var PAGE_TITLE = document.title;
+
+  function formatCurrency(pence) {
+    return '\u00a3' + (pence / 100).toFixed(2);
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return 'TBA';
+    var d = new Date(dateStr);
+    return d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  function formatTime(dateStr) {
+    if (!dateStr) return 'TBA';
+    var d = new Date(dateStr);
+    return d.toLocaleTimeString('en-GB', { hour: 'numeric', minute: '2-digit', hour12: true });
+  }
+
+  function updateCountdown() {
+    if (!EVENT_START) return;
+    var target = new Date(EVENT_START).getTime();
+    var now = Date.now();
+    var diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-mins').textContent = '0';
+      return;
+    }
+    var days = Math.floor(diff / 86400000);
+    var hours = Math.floor((diff % 86400000) / 3600000);
+    var mins = Math.floor((diff % 3600000) / 60000);
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = hours;
+    document.getElementById('cd-mins').textContent = mins;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+
+  fetch('https://www.eventbriteapi.com/v3/events/' + EVENT_ID + '/?token=' + TOKEN)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.name && data.name.text) {
+        var title = data.name.text;
+        document.getElementById('event-title').textContent = title;
+        document.title = title + ' | Scots Music Group';
+        PAGE_TITLE = title;
+      }
+      if (data.start) {
+        document.getElementById('event-date').textContent = formatDate(data.start.utc);
+        document.getElementById('event-time').textContent = 'Doors 7pm, dancing ' + formatTime(data.start.utc) + ' \u2013 ' + formatTime(data.end.utc);
+        if (data.start.utc && !EVENT_START) {
+          EVENT_START = data.start.utc;
+          updateCountdown();
+        }
+      }
+      if (data.description && data.description.html) {
+        document.getElementById('event-description').innerHTML = data.description.html;
+      }
+      if (data.logo && data.logo.original && data.logo.original.url) {
+        document.getElementById('event-hero-img').src = data.logo.original.url;
+      }
+      if (data.url) {
+        document.getElementById('event-band').textContent = data.name.text.replace('TEST EVENT - Ceilidh with ', '').replace(' | Scots Music Group', '');
+      }
+      updateShareLinks();
+    })
+    .catch(function(err) {
+      console.warn('Eventbrite API fetch failed, using static data:', err);
+    });
+
+  function updateShareLinks() {
+    var fb = document.getElementById('share-facebook');
+    var tw = document.getElementById('share-twitter');
+    var em = document.getElementById('share-email');
+    if (fb) fb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(PAGE_URL);
+    if (tw) tw.href = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(PAGE_URL) + '&text=' + encodeURIComponent(PAGE_TITLE);
+    if (em) em.href = 'mailto:?subject=' + encodeURIComponent(PAGE_TITLE) + '&body=' + encodeURIComponent('Check out this event: ' + PAGE_URL);
+  }
+
+  if (typeof EBWidgets !== 'undefined') {
+    window.EBWidgets.createWidget({
+      widgetType: 'checkout',
+      eventId: EVENT_ID,
+      modal: true,
+      modalTriggerElementId: 'eventbrite-widget-modal-trigger',
+      onOrderComplete: function() {
+        console.log('Order complete');
+      }
+    });
+  }
+})();
+</script>
+{% endblock %}

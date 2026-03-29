@@ -28,9 +28,9 @@
     </div>
     <div class="grid grid-3">
       {% set ceilidhs = [
-        { date: 'Sat 28 March 2026', band: 'Portobello Ceilidh Band', venue: "St Bride's Centre, Orwell Terrace", time: 'Doors 7pm, dancing 7:30&ndash;11pm', price_full: '&pound;12', price_conc: '&pound;8', price_door: '&pound;15/&pound;10' },
-        { date: 'Sat 25 April 2026', band: "Bella McNab's Dance Band", venue: "St Bride's Centre, Orwell Terrace", time: 'Doors 7pm, dancing 7:30&ndash;11pm', price_full: '&pound;12', price_conc: '&pound;8', price_door: '&pound;15/&pound;10' },
-        { date: 'Sat 30 May 2026', band: 'Sensational Jimi Shandrix Experience', venue: "St Bride's Centre, Orwell Terrace", time: 'Doors 7pm, dancing 7:30&ndash;11pm', price_full: '&pound;12', price_conc: '&pound;8', price_door: '&pound;15/&pound;10' }
+        { date: 'Sat 28 March 2026', band: 'Portobello Ceilidh Band', venue: "St Bride's Centre, Orwell Terrace", time: 'Doors 7pm, dancing 7:30&ndash;11pm', price_full: '&pound;12', price_conc: '&pound;8', price_door: '&pound;15/&pound;10', href: '/ceilidhs.html' },
+        { date: 'Sat 25 April 2026', band: "Bella McNab's Dance Band", venue: "St Bride's Centre, Orwell Terrace", time: 'Doors 7pm, dancing 7:30&ndash;11pm', price_full: '&pound;12', price_conc: '&pound;8', price_door: '&pound;15/&pound;10', href: '/event/bella-mcnab.html' },
+        { date: 'Sat 30 May 2026', band: 'Sensational Jimi Shandrix Experience', venue: "St Bride's Centre, Orwell Terrace", time: 'Doors 7pm, dancing 7:30&ndash;11pm', price_full: '&pound;12', price_conc: '&pound;8', price_door: '&pound;15/&pound;10', href: '/event/jimi-shandrix.html' }
       ] %}
       {% for c in ceilidhs %}
       <div class="event-card reveal{% if loop.index > 1 %} reveal-d{{ loop.index - 1 }}{% endif %}">
@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="event-card-footer">
-          <a href="https://www.scotsmusic.org/ceilidhs/" class="btn btn-primary" style="width:100%;justify-content:center;">Buy Tickets</a>
+          <a href="{{ c.href | default('/ceilidhs.html') }}" class="btn btn-primary" style="width:100%;justify-content:center;">Buy Tickets</a>
         </div>
       </div>
       {% endfor %}
