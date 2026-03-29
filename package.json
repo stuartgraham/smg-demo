@@ -12,6 +12,8 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "clean-css": "^5.3.3",
+    "html-minifier-terser": "^7.2.0",
     "nunjucks": "^3.2.4"
   }
 }

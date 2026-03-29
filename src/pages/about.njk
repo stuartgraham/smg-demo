@@ -1,0 +1,233 @@
+{% extends "templates/base.njk" %}
+{% from "partials/icons.njk" import map_pin, mail, phone, users, star, check_circle, info_circle, music_note, heart, book %}
+{% set description = "About Scots Music Group. Our mission, values, board members, staff, tutors, venues and contact information. Community-based charity in Edinburgh keeping traditional Scottish music alive." %}
+{% set canonical = "about.html" %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1>About Us</h1>
+    <p>Keeping traditional Scottish music, song and dance alive in Edinburgh since 2007.</p>
+  </div>
+</div>
+
+{# ===== HERO IMAGE BANNER ===== #}
+<section class="hero-image" aria-label="Banner image" style="position:relative;overflow:hidden;height:320px;background:#1a0a09;">
+  <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=1200&q=80" alt="Music ensemble rehearsal" loading="lazy" style="width:100%;height:100%;object-fit:cover;opacity:0.4;">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,15,14,0.7) 0%,rgba(58,15,14,0.5) 100%);display:flex;align-items:center;justify-content:center;">
+    <p style="font-family:var(--ff-display);font-size:clamp(1.3rem,3vw,2rem);font-weight:600;color:var(--clr-cream);text-align:center;max-width:680px;padding:0 var(--sp-lg);line-height:1.4;">Community-building through traditional music, song and dance since 2007</p>
+  </div>
+</section>
+
+{# ===== OUR STORY ===== #}
+<section class="section section--cream" aria-labelledby="story-heading">
+  <div class="container" style="max-width:900px;">
+    <div class="section-header">
+      <span class="section-label">Our Story</span>
+      <h2 id="story-heading" class="section-title">A community charity rooted in tradition</h2>
+    </div>
+
+    <div class="reveal" style="max-width:720px;margin:0 auto var(--sp-2xl);text-align:center;">
+      <p style="font-size:1.05rem;color:var(--clr-ink-soft);line-height:1.8;margin-bottom:var(--sp-lg);">Scots Music Group is a community-based charity dedicated to keeping traditional Scottish music, song and dance alive and accessible. Originally founded as part of the <strong>Adult Learning Project (ALP)</strong>, funded by City of Edinburgh Council, SMG has grown into an independent organisation at the heart of Edinburgh&rsquo;s traditional music scene.</p>
+      <p style="font-size:1.05rem;color:var(--clr-ink-soft);line-height:1.8;margin-bottom:var(--sp-lg);">In 2007, SMG was voted <strong>&lsquo;Community Project of the Year&rsquo;</strong> at the prestigious Scots Trad Music Awards &mdash; a testament to the dedication of our tutors, volunteers and community.</p>
+      <p style="font-size:1.05rem;color:var(--clr-ink-soft);line-height:1.8;margin-bottom:var(--sp-lg);">We run <strong>classes, ceilidhs, sessions and community events</strong> throughout the year, all led by experienced tutors and musicians who are passionate about sharing Scotland&rsquo;s musical heritage.</p>
+      <div style="display:flex;gap:var(--sp-xl);justify-content:center;flex-wrap:wrap;margin-top:var(--sp-lg);">
+        <div style="text-align:center;">
+          <span style="font-family:var(--ff-display);font-size:1.8rem;font-weight:700;color:var(--clr-amber);">SC032702</span>
+          <p style="font-size:0.8rem;color:var(--clr-stone);margin-top:var(--sp-2xs);">Charity Number</p>
+        </div>
+        <div style="text-align:center;">
+          <span style="font-family:var(--ff-display);font-size:1.8rem;font-weight:700;color:var(--clr-amber);">SC265190</span>
+          <p style="font-size:0.8rem;color:var(--clr-stone);margin-top:var(--sp-2xs);">Company Number</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-3 reveal" style="gap:var(--sp-md);">
+      <div style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;">
+        <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=600&q=80" alt="Piano and sheet music" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;">
+        <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80" alt="Concert performance" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;">
+        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&q=80" alt="Group music session" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ===== OUR VALUES ===== #}
+<section class="section section--white" aria-labelledby="values-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our Values</span>
+      <h2 id="values-heading" class="section-title">What guides us</h2>
+      <p class="section-subtitle">The principles at the heart of everything we do.</p>
+    </div>
+    <div class="grid grid-3 reveal">
+      {% set values = [
+        { title: 'Respect', icon: 'star', desc: 'Critical relationship of respect to Scottish music, song and dance.' },
+        { title: 'History', icon: 'book', desc: 'Build repertoire in the Scottish idiom with reference to past, present, future.' },
+        { title: 'Tradition', icon: 'music_note', desc: 'Encourage and maintain oral and aural transmission of Scottish tradition.' },
+        { title: 'Connected', icon: 'users', desc: 'Foster connections with other cultures&rsquo; traditions.' },
+        { title: 'Learning', icon: 'check_circle', desc: 'Bring best practitioners as performers and tutors to inspire students.' },
+        { title: 'Fair', icon: 'heart', desc: 'Maintain democratic and participative style of voluntary organisation.' }
+      ] %}
+      {% for v in values %}
+      <div class="card">
+        <div class="card-body" style="text-align:center;">
+          <div style="width:52px;height:52px;border-radius:50%;background:var(--clr-cream-warm);display:flex;align-items:center;justify-content:center;margin:0 auto var(--sp-md);">
+            {% if v.icon == 'star' %}{{ star('icon-box--amber') }}{% elif v.icon == 'book' %}{{ book('icon-box--amber') }}{% elif v.icon == 'music_note' %}{{ music_note('icon-box--amber') }}{% elif v.icon == 'users' %}{{ users('icon-box--amber') }}{% elif v.icon == 'check_circle' %}{{ check_circle('icon-box--amber') }}{% elif v.icon == 'heart' %}{{ heart('icon-box--amber') }}{% endif %}
+          </div>
+          <h3>{{ v.title }}</h3>
+          <p>{{ v.desc | safe }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===== BOARD MEMBERS ===== #}
+<section class="section section--cream" aria-labelledby="board-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Governance</span>
+      <h2 id="board-heading" class="section-title">Board Members</h2>
+      <p class="section-subtitle">Volunteers who give their time to govern and guide SMG.</p>
+    </div>
+    <div class="grid grid-3 reveal">
+      {% set board = [
+        { name: 'Graham Hutton', role: 'Chairman', desc: 'Composer, arranger and studio owner.' },
+        { name: 'Paul McIntosh', role: 'Treasurer', desc: 'Guitar player, board member since 2015.' },
+        { name: 'Jamie Taylor', role: 'Board Member', desc: 'Fiddle, smallpipes and whistle player, joined 2019.' },
+        { name: 'Fiona Harrison', role: 'Board Member', desc: 'Fiddle, guitar and singing, involved for over 15 years.' },
+        { name: 'Bill Savage', role: 'Board Member', desc: 'Keen ceilidh dancer.' },
+        { name: 'Charles Everitt', role: 'Board Member', desc: 'Guitar player.' }
+      ] %}
+      {% for member in board %}
+      <div class="card">
+        <div class="card-body" style="text-align:center;">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--clr-maroon-deep);display:flex;align-items:center;justify-content:center;margin:0 auto var(--sp-md);">{{ users('icon-box--amber') }}</div>
+          <h3>{{ member.name }}</h3>
+          <p style="font-weight:600;color:var(--clr-amber);font-size:0.85rem;margin-bottom:var(--sp-xs);">{{ member.role }}</p>
+          <p>{{ member.desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===== STAFF ===== #}
+<section class="section section--white section--compact" aria-labelledby="staff-heading">
+  <div class="container" style="max-width:700px;">
+    <div class="section-header">
+      <span class="section-label">Our Team</span>
+      <h2 id="staff-heading" class="section-title">Staff</h2>
+    </div>
+    <div class="grid grid-2 reveal">
+      <div class="card">
+        <div class="card-body" style="text-align:center;">
+          <h3>Sarah Northcott</h3>
+          <p style="font-weight:600;color:var(--clr-amber);font-size:0.85rem;margin-bottom:var(--sp-xs);">Interim Development Worker</p>
+          <p>15 hours per week</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body" style="text-align:center;">
+          <h3>Iain McQueen</h3>
+          <p style="font-weight:600;color:var(--clr-amber);font-size:0.85rem;margin-bottom:var(--sp-xs);">Administrator</p>
+          <p>14 hours per week</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ===== VENUES ===== #}
+<section class="section section--cream" aria-labelledby="venues-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Where We Meet</span>
+      <h2 id="venues-heading" class="section-title">Venues</h2>
+      <p class="section-subtitle">Edinburgh locations where our classes, ceilidhs and sessions take place.</p>
+    </div>
+    <div class="grid grid-3 reveal">
+      {% set venues = [
+        { name: "James Gillespie's High School", desc: 'Most evening classes including Fiddle, Guitar, Accordion and more.' },
+        { name: "St Bride's Centre", desc: 'Monthly ceilidhs. 10 Orwell Terrace, EH11 2DZ.' },
+        { name: 'Scottish Storytelling Centre', desc: 'Caf&eacute; Ceilidh sessions.' },
+        { name: 'Christ Church Centre', desc: 'Song sessions. 6A Morningside Road.' },
+        { name: 'Gorgie Dalry Stenhouse Church', desc: 'Mixed Instrument 1.' },
+        { name: 'Morningside United Church', desc: 'Mixed Instrument 2 &amp; 3.' },
+        { name: 'Greyfriars Charteris Centre', desc: 'Workshops.' }
+      ] %}
+      {% for venue in venues %}
+      <div class="card">
+        <div class="card-body">
+          <div style="display:flex;align-items:flex-start;gap:var(--sp-sm);margin-bottom:var(--sp-sm);">
+            <span style="flex-shrink:0;color:var(--clr-amber);width:20px;margin-top:2px;">{{ map_pin() }}</span>
+            <h3 style="margin-bottom:0;">{{ venue.name }}</h3>
+          </div>
+          <p style="padding-left:28px;">{{ venue.desc | safe }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===== CONTACT ===== #}
+<section class="section section--white section--compact" aria-labelledby="contact-heading">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header">
+      <span class="section-label">Get in Touch</span>
+      <h2 id="contact-heading" class="section-title">Contact Us</h2>
+    </div>
+    <div class="card reveal" style="border-color:var(--clr-amber);">
+      <div class="card-body" style="padding:var(--sp-xl);">
+        <div class="grid grid-2" style="gap:var(--sp-xl);">
+          <div>
+            <div style="display:flex;align-items:flex-start;gap:var(--sp-md);margin-bottom:var(--sp-lg);">
+              <span style="flex-shrink:0;color:var(--clr-amber);width:22px;margin-top:3px;">{{ map_pin() }}</span>
+              <div>
+                <h3 style="margin-bottom:var(--sp-xs);">Address</h3>
+                <address style="font-style:normal;font-size:0.9rem;color:var(--clr-ink-soft);line-height:1.7;">
+                  Eric Liddell Community<br>
+                  15 Morningside Road<br>
+                  Edinburgh EH10 4DP
+                </address>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:var(--sp-md);margin-bottom:var(--sp-lg);">
+              <span style="flex-shrink:0;color:var(--clr-amber);width:22px;margin-top:3px;">{{ mail() }}</span>
+              <div>
+                <h3 style="margin-bottom:var(--sp-xs);">Email</h3>
+                <a href="mailto:admin@scotsmusic.org" style="font-size:0.9rem;">admin@scotsmusic.org</a>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:flex-start;gap:var(--sp-md);margin-bottom:var(--sp-lg);">
+              <span style="flex-shrink:0;color:var(--clr-amber);width:22px;margin-top:3px;">{{ phone() }}</span>
+              <div>
+                <h3 style="margin-bottom:var(--sp-xs);">Phone</h3>
+                <a href="tel:01314479548" style="font-size:0.9rem;">0131 447 9548</a>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:var(--sp-md);margin-bottom:var(--sp-lg);">
+              <span style="flex-shrink:0;color:var(--clr-amber);width:22px;margin-top:3px;">{{ info_circle() }}</span>
+              <div>
+                <h3 style="margin-bottom:var(--sp-xs);">Office Hours</h3>
+                <p style="font-size:0.9rem;color:var(--clr-ink-soft);">Tuesday &amp; Thursday<br>10am &ndash; 4:30pm</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

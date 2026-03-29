@@ -1,4 +1,5 @@
 {% extends "templates/base.njk" %}
+{% from "partials/icons.njk" import fiddle, guitar, accordion, music_note, whistle, smallpipes, banjo, ukulele, music_group %}
 {% set description = "Browse traditional Scottish music classes for adults in Edinburgh. Fiddle, guitar, accordion, whistle, song, smallpipes, banjo, ukulele and mixed instrument classes." %}
 {% set canonical = "classes.html" %}
 
@@ -30,15 +31,15 @@
     </div>
     <div class="grid grid-3">
       {% set classes = [
-        { name: 'Fiddle', icon: '&#127931;', when: 'Thursday evenings', levels: 'All levels', desc: 'Multiple classes from beginner to advanced, all on the same night so you can find your level.' },
-        { name: 'Guitar', icon: '&#127928;', when: 'Thursday evenings', levels: 'All levels', desc: 'Traditional guitar styles. Classes run on the same night as fiddle for easy level changes.' },
-        { name: 'Accordion', icon: '&#127929;', when: 'Wednesday evenings', levels: 'All levels', desc: 'Piano accordion classes covering Scottish traditional repertoire.' },
-        { name: 'Song', icon: '&#127908;', when: 'Tue daytime &amp; Thu evenings', levels: 'All welcome', desc: 'Learn traditional Scots songs. Daytime song sessions and evening classes available.' },
-        { name: 'Whistle &amp; Flute', icon: '&#127925;', when: 'Thursday evenings', levels: 'All levels', desc: 'Tin whistle and wooden flute. A great starter instrument for beginners.' },
-        { name: 'Scottish Smallpipes', icon: '&#127927;', when: 'Wednesday evenings', levels: 'All levels', desc: 'Bellows-blown Scottish smallpipes with experienced tutors.' },
-        { name: '5-String Banjo', icon: '&#129685;', when: 'Short courses', levels: 'Varies', desc: 'Short courses available in Term 3 for banjo players.' },
-        { name: 'Ukulele', icon: '&#127930;', when: 'Thursday evenings', levels: 'Improver', desc: 'Improver-level ukulele focusing on traditional Scottish tunes.' },
-        { name: 'Mixed Instrument', icon: '&#127923;', when: 'Tue, Wed &amp; Thu', levels: 'Multiple levels', desc: 'Bring any acoustic instrument. Sessions and slow sessions available at various levels.' }
+        { name: 'Fiddle', icon: fiddle('icon icon-xl'), when: 'Thursday evenings', levels: 'All levels', desc: 'Multiple classes from beginner to advanced, all on the same night so you can find your level.' },
+        { name: 'Guitar', icon: guitar('icon icon-xl'), when: 'Thursday evenings', levels: 'All levels', desc: 'Traditional guitar styles. Classes run on the same night as fiddle for easy level changes.' },
+        { name: 'Accordion', icon: accordion('icon icon-xl'), when: 'Wednesday evenings', levels: 'All levels', desc: 'Piano accordion classes covering Scottish traditional repertoire.' },
+        { name: 'Song', icon: music_note('icon icon-xl'), when: 'Tue daytime &amp; Thu evenings', levels: 'All welcome', desc: 'Learn traditional Scots songs. Daytime song sessions and evening classes available.' },
+        { name: 'Whistle &amp; Flute', icon: whistle('icon icon-xl'), when: 'Thursday evenings', levels: 'All levels', desc: 'Tin whistle and wooden flute. A great starter instrument for beginners.' },
+        { name: 'Scottish Smallpipes', icon: smallpipes('icon icon-xl'), when: 'Wednesday evenings', levels: 'All levels', desc: 'Bellows-blown Scottish smallpipes with experienced tutors.' },
+        { name: '5-String Banjo', icon: banjo('icon icon-xl'), when: 'Short courses', levels: 'Varies', desc: 'Short courses available in Term 3 for banjo players.' },
+        { name: 'Ukulele', icon: ukulele('icon icon-xl'), when: 'Thursday evenings', levels: 'Improver', desc: 'Improver-level ukulele focusing on traditional Scottish tunes.' },
+        { name: 'Mixed Instrument', icon: music_group('icon icon-xl'), when: 'Tue, Wed &amp; Thu', levels: 'Multiple levels', desc: 'Bring any acoustic instrument. Sessions and slow sessions available at various levels.' }
       ] %}
       {% for cls in classes %}
       <div class="card reveal" style="overflow:hidden;">

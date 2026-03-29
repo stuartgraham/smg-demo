@@ -380,6 +380,109 @@ a:focus-visible { outline: 2px solid var(--clr-amber); outline-offset: 3px; bord
   .grid-4 { grid-template-columns: 1fr; }
 }
 
+/* ============================================
+   ICONS
+   ============================================ */
+.icon { width: 24px; height: 24px; display: inline-block; vertical-align: middle; flex-shrink: 0; color: inherit; }
+.icon-sm { width: 16px; height: 16px; }
+.icon-lg { width: 32px; height: 32px; }
+.icon-xl { width: 48px; height: 48px; }
+
+.icon-box {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border-radius: 16px;
+  background: var(--clr-cream-warm); color: var(--clr-maroon-deep);
+  transition: all 0.25s var(--ease);
+}
+.icon-box .icon { width: 28px; height: 28px; }
+.icon-box--amber { background: rgba(200,146,60,0.12); color: var(--clr-amber); }
+.icon-box--maroon { background: rgba(91,26,24,0.08); color: var(--clr-maroon); }
+.icon-box--cream { background: var(--clr-cream); color: var(--clr-maroon-deep); }
+.icon-box--white { background: rgba(255,255,255,0.1); color: var(--clr-cream); }
+.icon-box--sm { width: 40px; height: 40px; border-radius: 12px; }
+.icon-box--sm .icon { width: 20px; height: 20px; }
+
+/* ============================================
+   IMAGE CARDS
+   ============================================ */
+.card-image {
+  position: relative; overflow: hidden; border-radius: var(--radius-lg);
+}
+.card-image img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.4s var(--ease);
+}
+.card-image:hover img { transform: scale(1.05); }
+.card-image--portrait { aspect-ratio: 3/4; }
+.card-image--landscape { aspect-ratio: 16/9; }
+.card-image--square { aspect-ratio: 1/1; }
+.card-image-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: var(--sp-lg); color: var(--clr-white);
+  background: linear-gradient(transparent, rgba(42,13,12,0.85));
+}
+
+/* ============================================
+   VALUE CARDS
+   ============================================ */
+.value-card {
+  text-align: center; padding: var(--sp-xl) var(--sp-lg);
+  border-radius: var(--radius-lg); background: var(--clr-white);
+  border: 1px solid var(--clr-border); transition: all 0.3s var(--ease);
+}
+.value-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(43,24,16,0.06); border-color: var(--clr-amber-light); }
+.value-card .icon-box { margin: 0 auto var(--sp-md); }
+.value-card h3 { font-family: var(--ff-display); font-size: 1.15rem; font-weight: 700; color: var(--clr-maroon-deep); margin-bottom: var(--sp-xs); }
+.value-card p { font-size: 0.88rem; color: var(--clr-stone); line-height: 1.6; }
+
+/* ============================================
+   STAT CARDS
+   ============================================ */
+.stat-card { text-align: center; padding: var(--sp-xl) var(--sp-lg); }
+.stat-number {
+  font-family: var(--ff-display); font-size: 2.5rem; font-weight: 700;
+  color: var(--clr-amber); line-height: 1;
+}
+.stat-label { font-size: 0.85rem; color: var(--clr-stone); margin-top: var(--sp-xs); }
+
+/* ============================================
+   PHOTO GRID
+   ============================================ */
+.photo-grid {
+  display: grid; gap: var(--sp-sm); border-radius: var(--radius-lg); overflow: hidden;
+}
+.photo-grid--2x2 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.photo-grid--hero { grid-template-columns: 1.5fr 1fr; grid-template-rows: 1fr 1fr; }
+.photo-grid--hero > :first-child { grid-row: 1 / -1; }
+.photo-grid img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ============================================
+   ABOUT PAGE
+   ============================================ */
+.board-member {
+  display: flex; gap: var(--sp-lg); align-items: flex-start;
+  padding: var(--sp-lg); border-radius: var(--radius-lg);
+  background: var(--clr-white); border: 1px solid var(--clr-border);
+}
+.board-member-avatar {
+  width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0;
+  background: var(--clr-maroon-deep); color: var(--clr-amber-light);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-display); font-size: 1.4rem; font-weight: 700;
+}
+.board-member h3 { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 700; color: var(--clr-maroon-deep); }
+.board-member p { font-size: 0.85rem; color: var(--clr-stone); margin-top: 2px; }
+.board-member .role { font-size: 0.75rem; font-weight: 600; color: var(--clr-amber); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.venue-card {
+  background: var(--clr-white); border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.venue-card-body { padding: var(--sp-lg); }
+.venue-card h3 { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 700; color: var(--clr-maroon-deep); margin-bottom: var(--sp-xs); }
+.venue-card p { font-size: 0.85rem; color: var(--clr-stone); }
+.venue-card .venue-classes { font-size: 0.8rem; color: var(--clr-amber); font-weight: 500; margin-top: var(--sp-sm); }
+
 @media print {
   .site-header, .announcement, .skip-link, .footer-social, .menu-toggle { display: none; }
   body { color: #000; background: #fff; }

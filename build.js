@@ -1,6 +1,8 @@
 const nunjucks = require('nunjucks');
 const fs = require('fs');
 const path = require('path');
+const CleanCSS = require('clean-css');
+const { minify: htmlMinify } = require('html-minifier-terser');
 
 const env = nunjucks.configure(path.join(__dirname, 'src'), {
   autoescape: true,
@@ -11,7 +13,6 @@ const env = nunjucks.configure(path.join(__dirname, 'src'), {
 const distDir = path.join(__dirname, 'dist');
 if (!fs.existsSync(distDir)) fs.mkdirSync(distDir, { recursive: true });
 
-// Site-wide data
 const site = {
   name: 'Scots Music Group',
   tagline: 'Keeping Scots Music Alive',
@@ -43,7 +44,6 @@ const site = {
   ]
 };
 
-// Pages to build
 const pages = [
   { src: 'pages/index.njk', out: 'index.html', data: { pageId: 'home', title: 'Traditional Music Classes & Ceilidhs in Edinburgh' } },
   { src: 'pages/classes.njk', out: 'classes.html', data: { pageId: 'classes', title: 'Classes' } },
@@ -52,24 +52,48 @@ const pages = [
   { src: 'pages/community.njk', out: 'community.html', data: { pageId: 'community', title: 'Community' } },
   { src: 'pages/shop.njk', out: 'shop.html', data: { pageId: 'shop', title: 'Shop' } },
   { src: 'pages/news.njk', out: 'news.html', data: { pageId: 'news', title: 'News' } },
+  { src: 'pages/about.njk', out: 'about.html', data: { pageId: 'about', title: 'About Us' } },
   { src: 'pages/donate.njk', out: 'donate.html', data: { pageId: 'donate', title: 'Donate & Gift Aid' } },
 ];
 
-pages.forEach(page => {
-  try {
-    const html = nunjucks.render(page.src, { site, ...page.data });
-    fs.writeFileSync(path.join(distDir, page.out), html, 'utf-8');
-    console.log(`  Built: ${page.out}`);
-  } catch (err) {
-    console.error(`  ERROR building ${page.out}:`, err.message);
+(async () => {
+  for (const page of pages) {
+    try {
+      const html = nunjucks.render(page.src, { site, ...page.data });
+      const minified = await htmlMinify(html, {
+        collapseWhitespace: true,
+        conservativeCollapse: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeEmptyAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        minifyCSS: true,
+        minifyJS: true,
+        sortClassName: true,
+        sortAttributes: true,
+      });
+      fs.writeFileSync(path.join(distDir, page.out), minified, 'utf-8');
+      console.log(`  Built: ${page.out}`);
+    } catch (err) {
+      console.error(`  ERROR building ${page.out}:`, err.message);
+    }
   }
-});
 
-// Copy CSS
-const cssPath = path.join(__dirname, 'src', 'style.css');
-if (fs.existsSync(cssPath)) {
-  fs.copyFileSync(cssPath, path.join(distDir, 'style.css'));
-  console.log('  Copied: style.css');
-}
+  const cssPath = path.join(__dirname, 'src', 'style.css');
+  if (fs.existsSync(cssPath)) {
+    const cssSource = fs.readFileSync(cssPath, 'utf-8');
+    const result = new CleanCSS({ level: 2 }).minify(cssSource);
+    fs.writeFileSync(path.join(distDir, 'style.css'), result.styles, 'utf-8');
+    console.log(`  Built: style.css (${Math.round((1 - result.styles.length / cssSource.length) * 100)}% smaller)`);
+  }
 
-console.log('\nBuild complete!');
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages.map(p => `  <url><loc>${site.url}/${p.out}</loc><changefreq>weekly</changefreq></url>`).join('\n')}
+</urlset>`;
+  fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemap, 'utf-8');
+  console.log('  Built: sitemap.xml');
+
+  console.log('\nBuild complete!');
+})();

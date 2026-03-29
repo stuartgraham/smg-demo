@@ -1,8 +1,9 @@
 {% extends "templates/base.njk" %}
+{% from "partials/icons.njk" import fiddle, guitar, accordion, music_note, whistle, smallpipes, banjo, ukulele, music_group, calendar, map_pin, clock, ticket, users, heart, shopping_bag, chevron_right, star, sparkle %}
 
 {% block content %}
 {# ===== HERO — Single clear CTA, decluttered ===== #}
-<section class="hero" aria-labelledby="hero-heading">
+<section class="hero" aria-labelledby="hero-heading" style="background-image: linear-gradient(to right, rgba(42,13,12,0.92) 0%, rgba(42,13,12,0.7) 50%, rgba(42,13,12,0.4) 100%), url('https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=1200&q=80'); background-size: cover; background-position: center;">
   <div class="hero-inner container" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2xl);align-items:center;">
     <div>
       <div style="display:inline-flex;align-items:center;gap:var(--sp-sm);background:rgba(200,146,60,0.12);border:1px solid rgba(200,146,60,0.25);border-radius:99px;padding:3px 14px;font-size:0.75rem;color:var(--clr-amber-light);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:var(--sp-lg);">
@@ -18,22 +19,22 @@
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-md);" aria-label="Quick links">
       <a href="/ceilidhs.html" class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);padding:var(--sp-lg);text-decoration:none;">
-        <div style="font-size:1.8rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#127926;</div>
+        <div class="icon-box" style="margin-bottom:var(--sp-sm);" aria-hidden="true">{{ music_note('icon icon-lg') }}</div>
         <h3 style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--clr-white);margin-bottom:2px;">Ceilidhs</h3>
         <p style="font-size:0.78rem;color:var(--clr-stone-light);">Live bands, dancing, all welcome</p>
       </a>
       <a href="/donate.html" class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);padding:var(--sp-lg);text-decoration:none;">
-        <div style="font-size:1.8rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#10084;</div>
+        <div class="icon-box" style="margin-bottom:var(--sp-sm);" aria-hidden="true">{{ heart('icon icon-lg') }}</div>
         <h3 style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--clr-white);margin-bottom:2px;">Support Us</h3>
         <p style="font-size:0.78rem;color:var(--clr-stone-light);">Donate or Gift Aid</p>
       </a>
       <a href="/community.html" class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);padding:var(--sp-lg);text-decoration:none;">
-        <div style="font-size:1.8rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#127932;</div>
+        <div class="icon-box" style="margin-bottom:var(--sp-sm);" aria-hidden="true">{{ users('icon icon-lg') }}</div>
         <h3 style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--clr-white);margin-bottom:2px;">Community</h3>
         <p style="font-size:0.78rem;color:var(--clr-stone-light);">Sessions &amp; social events</p>
       </a>
       <a href="/shop.html" class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);padding:var(--sp-lg);text-decoration:none;">
-        <div style="font-size:1.8rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#127931;</div>
+        <div class="icon-box" style="margin-bottom:var(--sp-sm);" aria-hidden="true">{{ shopping_bag('icon icon-lg') }}</div>
         <h3 style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--clr-white);margin-bottom:2px;">Shop</h3>
         <p style="font-size:0.78rem;color:var(--clr-stone-light);">Tune books, CDs &amp; merch</p>
       </a>
@@ -46,8 +47,8 @@
 <section class="section section--warm" aria-labelledby="events-heading">
   <div class="container">
     <div class="section-header">
-      <span class="section-label">Upcoming Events</span>
-      <h2 id="events-heading" class="section-title">Get your tickets</h2>
+      <span class="section-label">{{ calendar('icon icon-sm') }} Upcoming Events</span>
+      <h2 id="events-heading" class="section-title">{{ ticket('icon icon-sm') }} Get your tickets</h2>
       <p class="section-subtitle">Our ceilidhs and events are how we keep the lights on. They sell out fast!</p>
     </div>
     <div class="grid grid-3">
@@ -65,8 +66,8 @@
         <div class="event-card-body">
           <h3>Ceilidh with {{ event.band }}</h3>
           <div class="event-card-meta">
-            <span>{{ event.venue }}</span>
-            <span>{{ event.time }}</span>
+            <span>{{ map_pin('icon icon-sm') }} {{ event.venue }}</span>
+            <span>{{ clock('icon icon-sm') }} {{ event.time }}</span>
           </div>
         </div>
         <div class="event-card-footer">
@@ -88,19 +89,19 @@
     </div>
     <div class="grid grid-3" style="margin-bottom:var(--sp-xl);">
       {% set instruments = [
-        { name: 'Fiddle', icon: '&#127931;', when: 'Thu evenings' },
-        { name: 'Guitar', icon: '&#127928;', when: 'Thu evenings' },
-        { name: 'Accordion', icon: '&#127929;', when: 'Wed evenings' },
-        { name: 'Song', icon: '&#127908;', when: 'Tue &amp; Thu' },
-        { name: 'Whistle &amp; Flute', icon: '&#127925;', when: 'Thu evenings' },
-        { name: 'Smallpipes', icon: '&#127927;', when: 'Wed evenings' },
-        { name: 'Banjo', icon: '&#129685;', when: 'Short courses' },
-        { name: 'Ukulele', icon: '&#127930;', when: 'Thu evenings' },
-        { name: 'Mixed Instrument', icon: '&#127923;', when: 'Tue, Wed &amp; Thu' }
+        { name: 'Fiddle', icon: 'fiddle', when: 'Thu evenings' },
+        { name: 'Guitar', icon: 'guitar', when: 'Thu evenings' },
+        { name: 'Accordion', icon: 'accordion', when: 'Wed evenings' },
+        { name: 'Song', icon: 'music_note', when: 'Tue &amp; Thu' },
+        { name: 'Whistle &amp; Flute', icon: 'whistle', when: 'Thu evenings' },
+        { name: 'Smallpipes', icon: 'smallpipes', when: 'Wed evenings' },
+        { name: 'Banjo', icon: 'banjo', when: 'Short courses' },
+        { name: 'Ukulele', icon: 'ukulele', when: 'Thu evenings' },
+        { name: 'Mixed Instrument', icon: 'music_group', when: 'Tue, Wed &amp; Thu' }
       ] %}
       {% for inst in instruments %}
-      <a href="/classes.html" class="card reveal" style="text-align:center;padding:var(--sp-xl) var(--sp-lg);text-decoration:none;position:relative;overflow:hidden;" aria-label="{{ inst.name }} classes">
-        <div style="font-size:2.2rem;margin-bottom:var(--sp-sm);" aria-hidden="true">{{ inst.icon | safe }}</div>
+      <a href="/classes.html" class="card reveal" style="text-align:center;padding:var(--sp-xl) var(--sp-lg);text-decoration:none;position:relative;overflow:hidden;" aria-label="{{ inst.name | safe }} classes">
+        <div class="icon-box" style="margin-bottom:var(--sp-sm);" aria-hidden="true">{% if inst.icon == 'fiddle' %}{{ fiddle('icon icon-lg') }}{% elif inst.icon == 'guitar' %}{{ guitar('icon icon-lg') }}{% elif inst.icon == 'accordion' %}{{ accordion('icon icon-lg') }}{% elif inst.icon == 'music_note' %}{{ music_note('icon icon-lg') }}{% elif inst.icon == 'whistle' %}{{ whistle('icon icon-lg') }}{% elif inst.icon == 'smallpipes' %}{{ smallpipes('icon icon-lg') }}{% elif inst.icon == 'banjo' %}{{ banjo('icon icon-lg') }}{% elif inst.icon == 'ukulele' %}{{ ukulele('icon icon-lg') }}{% elif inst.icon == 'music_group' %}{{ music_group('icon icon-lg') }}{% endif %}</div>
         <h3 style="font-family:var(--ff-display);font-size:1.15rem;font-weight:700;color:var(--clr-maroon-deep);margin-bottom:2px;">{{ inst.name | safe }}</h3>
         <p style="font-size:0.8rem;color:var(--clr-stone);">{{ inst.when | safe }}</p>
       </a>
@@ -117,7 +118,7 @@
   <div class="container">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-xl);flex-wrap:wrap;gap:var(--sp-md);">
       <div>
-        <span class="section-label">Latest</span>
+        <span class="section-label">{{ sparkle('icon icon-sm') }} Latest</span>
         <h2 id="news-heading" class="section-title" style="text-align:left;">News</h2>
       </div>
       <a href="/news.html" class="btn btn-outline btn-sm">All News</a>
@@ -147,7 +148,7 @@
 <section class="section section--warm section--compact" aria-labelledby="support-heading">
   <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--sp-xl);flex-wrap:wrap;">
     <div style="max-width:55ch;">
-      <h2 id="support-heading" style="font-family:var(--ff-display);font-size:1.6rem;font-weight:700;color:var(--clr-maroon-deep);margin-bottom:var(--sp-sm);">Support Scots Music Group</h2>
+      <h2 id="support-heading" style="font-family:var(--ff-display);font-size:1.6rem;font-weight:700;color:var(--clr-maroon-deep);margin-bottom:var(--sp-sm);">{{ heart('icon icon-sm') }} Support Scots Music Group</h2>
       <p style="color:var(--clr-stone);">We&rsquo;re a registered charity keeping traditional Scottish music alive. Your donations help us offer affordable classes and community events for everyone.</p>
     </div>
     <div style="display:flex;gap:var(--sp-md);flex-wrap:wrap;">

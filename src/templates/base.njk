@@ -1,12 +1,16 @@
+{% from "partials/icons.njk" import fiddle, guitar, accordion, music_note, whistle, smallpipes, banjo, ukulele, music_group, calendar, map_pin, clock, ticket, users, heart, shopping_bag, book, disc, shirt, chevron_right, chevron_down, external_link, check_circle, info_circle, phone, mail, star, sparkle %}
+{% from "partials/social-icons.njk" import icon as socialIcon %}
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#3A0F0E">
   <title>{{ title }} | {{ site.name }}</title>
   <meta name="description" content="{{ description | default('Scots Music Group offers traditional Scottish music and song classes for adults in Edinburgh. Join fiddle, guitar, accordion, whistle, song classes, plus monthly ceilidhs.') }}">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="{{ site.url }}/{{ canonical | default('') }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
   <meta property="og:locale" content="en_GB">
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ title }} | {{ site.name }}">
@@ -20,6 +24,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Scots Music Group",
+    "url": "{{ site.url }}",
+    "address": {
+      "@type": "PostalAddress",
+    "streetAddress": "Eric Liddell Community, 15 Morningside Road",
+    "addressLocality": "Edinburgh",
+    "postalCode": "EH10 4DP",
+    "addressCountry": "GB"
+  },
+  "charityNumber": "SC032702"
+  }
+  </script>
   {% block head %}{% endblock %}
 </head>
 <body>

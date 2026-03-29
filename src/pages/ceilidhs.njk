@@ -1,4 +1,5 @@
 {% extends "templates/base.njk" %}
+{% from "partials/icons.njk" import users, music_note, check_circle %}
 {% set description = "Buy tickets for Scots Music Group ceilidhs in Edinburgh. Live bands, traditional dancing, all ages welcome. Ceilidh dates, tickets, FAQs and venue information." %}
 {% set canonical = "ceilidhs.html" %}
 
@@ -63,17 +64,17 @@
     <h2 id="expect-heading" class="section-title" style="text-align:center;margin-bottom:var(--sp-xl);">What to expect</h2>
     <div class="grid grid-3 reveal">
       <div class="card"><div class="card-body" style="text-align:center;">
-        <div style="font-size:2rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#128131;</div>
+        <div style="font-size:2rem;margin-bottom:var(--sp-sm);" aria-hidden="true">{{ users('icon icon-lg') }}</div>
         <h3>No experience needed</h3>
         <p>A caller walks you through every dance. Friendly folk will help you along.</p>
       </div></div>
       <div class="card"><div class="card-body" style="text-align:center;">
-        <div style="font-size:2rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#127863;</div>
+        <div style="font-size:2rem;margin-bottom:var(--sp-sm);" aria-hidden="true">{{ music_note('icon icon-lg') }}</div>
         <h3>Bar &amp; raffle</h3>
         <p>Licensed bar on site. Fund-raising raffle during the break. Prize donations welcome!</p>
       </div></div>
       <div class="card"><div class="card-body" style="text-align:center;">
-        <div style="font-size:2rem;margin-bottom:var(--sp-sm);" aria-hidden="true">&#9855;</div>
+        <div style="font-size:2rem;margin-bottom:var(--sp-sm);" aria-hidden="true">{{ check_circle('icon icon-lg') }}</div>
         <h3>Accessible venue</h3>
         <p>St Bride&rsquo;s Centre is accessible. Staff will open the cafe door for wheelchair access.</p>
       </div></div>

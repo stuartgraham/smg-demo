@@ -11,6 +11,7 @@ concurrency:
 
 env:
   AWS_REGION: eu-west-1
+  SAM_CLI_TELEMETRY: 0
 
 permissions:
   id-token: write
@@ -25,6 +26,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -47,7 +50,17 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Check if infra changed
+        id: infra
+        run: |
+          if git diff --name-only HEAD^ HEAD | grep -qE '^(template\.yaml|samconfig\.toml)$'; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Deploy CloudFront stack
+        if: steps.infra.outputs.changed == 'true'
         run: |
           sam deploy \
             --parameter-overrides \

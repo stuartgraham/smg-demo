@@ -1,4 +1,5 @@
 {% extends "templates/base.njk" %}
+{% from "partials/icons.njk" import book as bookIcon, disc, shirt %}
 {% set description = "Buy Scots Music Group tune books, song books, CDs and branded clothing. Support our charity with every purchase." %}
 {% set canonical = "shop.html" %}
 
@@ -33,7 +34,7 @@
       ] %}
       {% for book in books %}
       <div class="card product-card reveal">
-        <div class="product-icon" aria-hidden="true">&#128214;</div>
+        <div class="product-icon" aria-hidden="true">{{ bookIcon('icon icon-xl') }}</div>
         <div class="card-body">
           <h3>{{ book.name }}</h3>
           <p style="font-size:0.8rem;color:var(--clr-stone);margin-bottom:var(--sp-sm);">Print {{ book.print | safe }} &bull; Digital {{ book.digital | safe }}</p>
@@ -55,7 +56,7 @@
     <div class="grid grid-4">
       {% for i in [1, 2] %}
       <div class="card product-card reveal">
-        <div class="product-icon" aria-hidden="true">&#128191;</div>
+        <div class="product-icon" aria-hidden="true">{{ disc('icon icon-xl') }}</div>
         <div class="card-body">
           <h3>Session Tunes {{ i }} CD</h3>
           <div class="product-price">&pound;5</div>
@@ -76,7 +77,7 @@
     </div>
     <div class="grid grid-3 reveal">
       <div class="card product-card">
-        <div class="product-icon" aria-hidden="true">&#129509;</div>
+        <div class="product-icon" aria-hidden="true">{{ shirt('icon icon-xl') }}</div>
         <div class="card-body">
           <h3>Hoodies</h3>
           <div class="product-price">&pound;23.99</div>
@@ -84,7 +85,7 @@
         </div>
       </div>
       <div class="card product-card">
-        <div class="product-icon" aria-hidden="true">&#128085;</div>
+        <div class="product-icon" aria-hidden="true">{{ shirt('icon icon-xl') }}</div>
         <div class="card-body">
           <h3>T-Shirts</h3>
           <div class="product-price">From &pound;17.99</div>
@@ -92,7 +93,7 @@
         </div>
       </div>
       <div class="card product-card">
-        <div class="product-icon" aria-hidden="true">&#128084;</div>
+        <div class="product-icon" aria-hidden="true">{{ shirt('icon icon-xl') }}</div>
         <div class="card-body">
           <h3>Shirts</h3>
           <div class="product-price">&pound;19.99</div>
