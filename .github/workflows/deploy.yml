@@ -55,7 +55,14 @@ jobs:
           sam deploy \
             --parameter-overrides \
               DomainName=${{ secrets.DOMAIN_NAME }} \
-              AcmCertificateArn=${{ secrets.ACM_CERTIFICATE_ARN }}
+              AcmCertificateArn=${{ secrets.ACM_CERTIFICATE_ARN }} \
+          2>&1 | tee /tmp/sam-deploy.log; rc=${PIPESTATUS[0]}
+          if [ $rc -eq 0 ]; then exit 0; fi
+          if grep -q "No changes to deploy" /tmp/sam-deploy.log; then
+            echo "Stack up to date"
+            exit 0
+          fi
+          exit $rc
 
       - name: Read stack outputs
         id: stack
