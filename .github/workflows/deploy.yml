@@ -50,17 +50,7 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Check if infra changed
-        id: infra
-        run: |
-          if git diff --name-only HEAD^ HEAD | grep -qE '^(template\.yaml|samconfig\.toml)$'; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Deploy CloudFront stack
-        if: steps.infra.outputs.changed == 'true'
         run: |
           sam deploy \
             --parameter-overrides \
