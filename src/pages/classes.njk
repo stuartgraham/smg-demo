@@ -38,20 +38,20 @@
     </div>
     <div class="grid grid-3">
       {% set classes = [
-        { name: 'Fiddle', icon: fiddle('icon icon-xl'), when: 'Thursday evenings', levels: 'All levels', desc: 'Multiple classes from beginner to advanced, all on the same night so you can find your level.' },
-        { name: 'Guitar', icon: guitar('icon icon-xl'), when: 'Thursday evenings', levels: 'All levels', desc: 'Traditional guitar styles. Classes run on the same night as fiddle for easy level changes.' },
-        { name: 'Accordion', icon: accordion('icon icon-xl'), when: 'Wednesday evenings', levels: 'All levels', desc: 'Piano accordion classes covering Scottish traditional repertoire.' },
-        { name: 'Song', icon: music_note('icon icon-xl'), when: 'Tue daytime &amp; Thu evenings', levels: 'All welcome', desc: 'Learn traditional Scots songs. Daytime song sessions and evening classes available.' },
-        { name: 'Whistle &amp; Flute', icon: whistle('icon icon-xl'), when: 'Thursday evenings', levels: 'All levels', desc: 'Tin whistle and wooden flute. A great starter instrument for beginners.' },
-        { name: 'Scottish Smallpipes', icon: smallpipes('icon icon-xl'), when: 'Wednesday evenings', levels: 'All levels', desc: 'Bellows-blown Scottish smallpipes with experienced tutors.' },
-        { name: '5-String Banjo', icon: banjo('icon icon-xl'), when: 'Short courses', levels: 'Varies', desc: 'Short courses available in Term 3 for banjo players.' },
-        { name: 'Ukulele', icon: ukulele('icon icon-xl'), when: 'Thursday evenings', levels: 'Improver', desc: 'Improver-level ukulele focusing on traditional Scottish tunes.' },
-        { name: 'Mixed Instrument', icon: music_group('icon icon-xl'), when: 'Tue, Wed &amp; Thu', levels: 'Multiple levels', desc: 'Bring any acoustic instrument. Sessions and slow sessions available at various levels.' }
+        { name: 'Fiddle', icon: '/images/icons/fiddle.svg', when: 'Thursday evenings', levels: 'All levels', desc: 'Multiple classes from beginner to advanced, all on the same night so you can find your level.' },
+        { name: 'Guitar', icon: '/images/icons/guitar.svg', when: 'Thursday evenings', levels: 'All levels', desc: 'Traditional guitar styles. Classes run on the same night as fiddle for easy level changes.' },
+        { name: 'Accordion', icon: '/images/icons/accordion.svg', when: 'Wednesday evenings', levels: 'All levels', desc: 'Piano accordion classes covering Scottish traditional repertoire.' },
+        { name: 'Song', icon: '/images/icons/song.png', when: 'Tue daytime &amp; Thu evenings', levels: 'All welcome', desc: 'Learn traditional Scots songs. Daytime song sessions and evening classes available.' },
+        { name: 'Whistle &amp; Flute', icon: '/images/icons/whistle.svg', when: 'Thursday evenings', levels: 'All levels', desc: 'Tin whistle and wooden flute. A great starter instrument for beginners.' },
+        { name: 'Scottish Smallpipes', icon: '/images/icons/smallpipes.svg', when: 'Wednesday evenings', levels: 'All levels', desc: 'Bellows-blown Scottish smallpipes with experienced tutors.' },
+        { name: '5-String Banjo', icon: '/images/icons/banjo.svg', when: 'Short courses', levels: 'Varies', desc: 'Short courses available in Term 3 for banjo players.' },
+        { name: 'Ukulele', icon: '/images/icons/ukulele.svg', when: 'Thursday evenings', levels: 'Improver', desc: 'Improver-level ukulele focusing on traditional Scottish tunes.' },
+        { name: 'Mixed Instrument', icon: '/images/icons/mixed-instrument.png', when: 'Tue, Wed &amp; Thu', levels: 'Multiple levels', desc: 'Bring any acoustic instrument. Sessions and slow sessions available at various levels.' }
       ] %}
       {% for cls in classes %}
       <div class="card reveal" style="overflow:hidden;">
         <div style="text-align:center;padding:var(--sp-lg) var(--sp-lg) 0;">
-          <div style="font-size:2.5rem;margin-bottom:var(--sp-sm);" aria-hidden="true">{{ cls.icon | safe }}</div>
+          <img src="{{ cls.icon }}" alt="{{ cls.name | safe }}" width="48" height="48" style="width:48px;height:48px;margin:0 auto var(--sp-sm);display:block;filter:brightness(0) saturate(100%) invert(12%) sepia(25%) saturate(1500%) hue-rotate(335deg) brightness(95%) contrast(90%);" loading="lazy">
           <h3 style="font-family:var(--ff-display);font-size:1.25rem;font-weight:700;color:var(--clr-maroon-deep);">{{ cls.name | safe }}</h3>
         </div>
         <div class="card-body">

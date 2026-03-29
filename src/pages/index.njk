@@ -51,11 +51,10 @@
       <h2 id="events-heading" class="section-title">{{ ticket('icon icon-sm') }} Get your tickets</h2>
       <p class="section-subtitle">Our ceilidhs and events are how we keep the lights on. They sell out fast!</p>
     </div>
-    <div class="grid grid-3">
+    <div class="grid grid-2" style="margin-bottom:var(--sp-2xl);">
       {% set events = [
-        { date: 'Sat 28 March', band: 'Portobello Ceilidh Band', venue: "St Bride's Centre", time: 'Doors 7pm', price: 'From &pound;8' },
-        { date: 'Sat 25 April', band: "Bella McNab's Dance Band", venue: "St Bride's Centre", time: 'Doors 7pm', price: 'From &pound;8' },
-        { date: 'Sat 30 May', band: 'Sensational Jimi Shandrix Experience', venue: "St Bride's Centre", time: 'Doors 7pm', price: 'From &pound;8' }
+        { date: 'Sat 25 April', band: "Bella McNab's Dance Band", venue: "St Bride's Centre", time: 'Doors 7pm', price: 'From &pound;8', href: '/event/bella-mcnab.html' },
+        { date: 'Sat 30 May', band: 'Sensational Jimi Shandrix Experience', venue: "St Bride's Centre", time: 'Doors 7pm', price: 'From &pound;8', href: '/event/jimi-shandrix.html' }
       ] %}
       {% for event in events %}
       <div class="event-card reveal{% if loop.index > 1 %} reveal-d{{ loop.index - 1 }}{% endif %}">
@@ -71,7 +70,29 @@
           </div>
         </div>
         <div class="event-card-footer">
-          <a href="/ceilidhs.html" class="btn btn-primary" style="width:100%;justify-content:center;">Buy Tickets</a>
+          <a href="{{ event.href }}" class="btn btn-primary" style="width:100%;justify-content:center;">Buy Tickets</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="section-header" style="margin-bottom:var(--sp-xl);">
+      <span class="section-label">{{ star('icon icon-sm') }} What people say</span>
+      <h3 class="section-title" style="font-size:clamp(1.4rem,2.5vw,1.8rem);">Our ceilidh regulars</h3>
+    </div>
+    <div class="grid grid-3 reveal">
+      {% set testimonials = [
+        { quote: 'I moved to Edinburgh knowing nobody. I went to a ceilidh on my own and by the end of the night I had a dozen new friends. Now I never miss one!', name: 'Sarah M.', detail: 'Regular since 2022' },
+        { quote: 'The caller makes it so easy. I was terrified I&rsquo;d embarrass myself but everyone was so encouraging. My partner and I now go to every single one.', name: 'James &amp; Fiona T.', detail: 'Attend 3&ndash;4 ceilidhs a year' },
+        { quote: 'My kids absolutely love it. The music is live, the energy is incredible, and it&rsquo;s so much better than a night on the sofa. Best value night out in Edinburgh.', name: 'Davie R.', detail: 'Brings the whole family' }
+      ] %}
+      {% for t in testimonials %}
+      <div class="card" style="padding:var(--sp-xl) var(--sp-lg);display:flex;flex-direction:column;">
+        <div style="color:var(--clr-amber);font-family:var(--ff-display);font-size:3rem;line-height:1;margin-bottom:var(--sp-sm);" aria-hidden="true">&ldquo;</div>
+        <p style="font-size:0.92rem;color:var(--clr-ink-soft);line-height:1.7;flex:1;font-style:italic;margin-bottom:var(--sp-lg);">{{ t.quote | safe }}</p>
+        <div style="border-top:1px solid var(--clr-border);padding-top:var(--sp-md);">
+          <div style="font-weight:700;color:var(--clr-maroon-deep);font-size:0.9rem;">{{ t.name | safe }}</div>
+          <div style="font-size:0.78rem;color:var(--clr-stone);">{{ t.detail | safe }}</div>
         </div>
       </div>
       {% endfor %}
@@ -89,19 +110,19 @@
     </div>
     <div class="grid grid-3" style="margin-bottom:var(--sp-xl);">
       {% set instruments = [
-        { name: 'Fiddle', icon: 'fiddle', when: 'Thu evenings' },
-        { name: 'Guitar', icon: 'guitar', when: 'Thu evenings' },
-        { name: 'Accordion', icon: 'accordion', when: 'Wed evenings' },
-        { name: 'Song', icon: 'music_note', when: 'Tue &amp; Thu' },
-        { name: 'Whistle &amp; Flute', icon: 'whistle', when: 'Thu evenings' },
-        { name: 'Smallpipes', icon: 'smallpipes', when: 'Wed evenings' },
-        { name: 'Banjo', icon: 'banjo', when: 'Short courses' },
-        { name: 'Ukulele', icon: 'ukulele', when: 'Thu evenings' },
-        { name: 'Mixed Instrument', icon: 'music_group', when: 'Tue, Wed &amp; Thu' }
+        { name: 'Fiddle', icon: '/images/icons/fiddle.svg', when: 'Thu evenings' },
+        { name: 'Guitar', icon: '/images/icons/guitar.svg', when: 'Thu evenings' },
+        { name: 'Accordion', icon: '/images/icons/accordion.svg', when: 'Wed evenings' },
+        { name: 'Song', icon: '/images/icons/song.png', when: 'Tue &amp; Thu' },
+        { name: 'Whistle &amp; Flute', icon: '/images/icons/whistle.svg', when: 'Thu evenings' },
+        { name: 'Smallpipes', icon: '/images/icons/smallpipes.svg', when: 'Wed evenings' },
+        { name: 'Banjo', icon: '/images/icons/banjo.svg', when: 'Short courses' },
+        { name: 'Ukulele', icon: '/images/icons/ukulele.svg', when: 'Thu evenings' },
+        { name: 'Mixed Instrument', icon: '/images/icons/mixed-instrument.png', when: 'Tue, Wed &amp; Thu' }
       ] %}
       {% for inst in instruments %}
-      <a href="/classes.html" class="card reveal" style="text-align:center;padding:var(--sp-xl) var(--sp-lg);text-decoration:none;position:relative;overflow:hidden;" aria-label="{{ inst.name | safe }} classes">
-        <div class="icon-box" style="margin-bottom:var(--sp-sm);" aria-hidden="true">{% if inst.icon == 'fiddle' %}{{ fiddle('icon icon-lg') }}{% elif inst.icon == 'guitar' %}{{ guitar('icon icon-lg') }}{% elif inst.icon == 'accordion' %}{{ accordion('icon icon-lg') }}{% elif inst.icon == 'music_note' %}{{ music_note('icon icon-lg') }}{% elif inst.icon == 'whistle' %}{{ whistle('icon icon-lg') }}{% elif inst.icon == 'smallpipes' %}{{ smallpipes('icon icon-lg') }}{% elif inst.icon == 'banjo' %}{{ banjo('icon icon-lg') }}{% elif inst.icon == 'ukulele' %}{{ ukulele('icon icon-lg') }}{% elif inst.icon == 'music_group' %}{{ music_group('icon icon-lg') }}{% endif %}</div>
+      <a href="/classes.html" class="card reveal" style="text-align:center;padding:var(--sp-xl) var(--sp-lg);text-decoration:none;" aria-label="{{ inst.name | safe }} classes">
+        <img src="{{ inst.icon }}" alt="{{ inst.name | safe }}" width="48" height="48" style="width:48px;height:48px;margin:0 auto var(--sp-sm);display:block;filter:brightness(0) saturate(100%) invert(12%) sepia(25%) saturate(1500%) hue-rotate(335deg) brightness(95%) contrast(90%);" loading="lazy">
         <h3 style="font-family:var(--ff-display);font-size:1.15rem;font-weight:700;color:var(--clr-maroon-deep);margin-bottom:2px;">{{ inst.name | safe }}</h3>
         <p style="font-size:0.8rem;color:var(--clr-stone);">{{ inst.when | safe }}</p>
       </a>

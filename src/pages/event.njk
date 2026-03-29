@@ -141,6 +141,11 @@
                 <span class="countdown-value" id="cd-mins">--</span>
                 <span class="countdown-label">Mins</span>
               </div>
+              <div class="countdown-sep">:</div>
+              <div class="countdown-unit">
+                <span class="countdown-value" id="cd-secs">--</span>
+                <span class="countdown-label">Secs</span>
+              </div>
             </div>
           </div>
         </div>
@@ -227,18 +232,23 @@
       document.getElementById('cd-days').textContent = '0';
       document.getElementById('cd-hours').textContent = '0';
       document.getElementById('cd-mins').textContent = '0';
+      document.getElementById('cd-secs').textContent = '0';
+      var el = document.getElementById('countdown-display');
+      if (el) el.setAttribute('data-ended', 'true');
       return;
     }
     var days = Math.floor(diff / 86400000);
     var hours = Math.floor((diff % 86400000) / 3600000);
     var mins = Math.floor((diff % 3600000) / 60000);
+    var secs = Math.floor((diff % 60000) / 1000);
     document.getElementById('cd-days').textContent = days;
     document.getElementById('cd-hours').textContent = hours;
     document.getElementById('cd-mins').textContent = mins;
+    document.getElementById('cd-secs').textContent = secs;
   }
 
   updateCountdown();
-  setInterval(updateCountdown, 60000);
+  setInterval(updateCountdown, 1000);
 
   fetch('https://www.eventbriteapi.com/v3/events/' + EVENT_ID + '/?token=' + TOKEN)
     .then(function(r) { return r.json(); })

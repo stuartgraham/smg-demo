@@ -143,6 +143,26 @@ const pages = [
     console.log(`  Built: style.css (${Math.round((1 - result.styles.length / cssSource.length) * 100)}% smaller)`);
   }
 
+  const imagesSrcDir = path.join(__dirname, 'src', 'images');
+  const imagesDistDir = path.join(distDir, 'images');
+  if (fs.existsSync(imagesSrcDir)) {
+    function copyRecursive(src, dest) {
+      if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
+      const entries = fs.readdirSync(src, { withFileTypes: true });
+      for (const entry of entries) {
+        const srcPath = path.join(src, entry.name);
+        const destPath = path.join(dest, entry.name);
+        if (entry.isDirectory()) {
+          copyRecursive(srcPath, destPath);
+        } else {
+          fs.copyFileSync(srcPath, destPath);
+        }
+      }
+    }
+    copyRecursive(imagesSrcDir, imagesDistDir);
+    console.log('  Copied: images/');
+  }
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages.map(p => `  <url><loc>${site.url}/${p.out}</loc><changefreq>weekly</changefreq></url>`).join('\n')}
