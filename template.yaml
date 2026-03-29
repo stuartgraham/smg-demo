@@ -21,6 +21,8 @@ Resources:
   # ---- S3 Bucket (private, no public access) ----
   SiteBucket:
     Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Properties:
       BucketName: !Sub 'smg-site-${AWS::AccountId}-${AWS::Region}'
       PublicAccessBlockConfiguration:
@@ -68,6 +70,8 @@ Resources:
   # ---- Logging Bucket for CloudFront ----
   LoggingBucket:
     Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Properties:
       BucketName: !Sub 'smg-logs-${AWS::AccountId}-${AWS::Region}'
       PublicAccessBlockConfiguration:
