@@ -291,8 +291,13 @@
     if (em) em.href = 'mailto:?subject=' + encodeURIComponent(PAGE_TITLE) + '&body=' + encodeURIComponent('Check out this event: ' + PAGE_URL);
   }
 
+  var widgetLoaded = false;
+  var widgetAttempts = 0;
+
   function initWidget() {
+    widgetAttempts++;
     if (typeof window.EBWidgets !== 'undefined') {
+      widgetLoaded = true;
       window.EBWidgets.createWidget({
         widgetType: 'checkout',
         eventId: EVENT_ID,
@@ -302,8 +307,15 @@
           console.log('Order complete');
         }
       });
-    } else {
+    } else if (widgetAttempts < 50) {
       setTimeout(initWidget, 200);
+    } else {
+      var btn = document.getElementById('eventbrite-widget-modal-trigger');
+      if (btn) {
+        btn.addEventListener('click', function() {
+          window.open('https://www.eventbrite.com/checkout-external?eid=' + EVENT_ID, '_blank');
+        });
+      }
     }
   }
   initWidget();

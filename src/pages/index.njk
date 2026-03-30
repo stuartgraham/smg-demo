@@ -14,7 +14,7 @@
       <p style="font-size:1.05rem;color:var(--clr-stone-light);line-height:1.7;margin-bottom:var(--sp-xl);max-width:48ch;">Classes for adults in fiddle, guitar, accordion, song, whistle, smallpipes, banjo and more. Plus monthly ceilidhs from Scotland&rsquo;s friendliest music charity.</p>
       <div style="display:flex;gap:var(--sp-md);flex-wrap:wrap;">
         <a href="/classes.html" class="btn btn-primary btn-lg">Enrol for Term 3 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="/ceilidhs.html" class="btn btn-outline-light btn-lg">Next Ceilidh &mdash; 28 Mar</a>
+        <a href="/ceilidhs.html" class="btn btn-outline-light btn-lg">Next Ceilidh &mdash; 25 Apr</a>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-md);" aria-label="Quick links">
@@ -76,23 +76,24 @@
       {% endfor %}
     </div>
 
-    <div class="section-header" style="margin-bottom:var(--sp-xl);">
+    <div style="margin-bottom:var(--sp-lg);">
       <span class="section-label">{{ star('icon icon-sm') }} What people say</span>
-      <h3 class="section-title" style="font-size:clamp(1.4rem,2.5vw,1.8rem);">Our ceilidh regulars</h3>
     </div>
     <div class="grid grid-3 reveal">
       {% set testimonials = [
-        { quote: 'I moved to Edinburgh knowing nobody. I went to a ceilidh on my own and by the end of the night I had a dozen new friends. Now I never miss one!', name: 'Sarah M.', detail: 'Regular since 2022' },
-        { quote: 'The caller makes it so easy. I was terrified I&rsquo;d embarrass myself but everyone was so encouraging. My partner and I now go to every single one.', name: 'James &amp; Fiona T.', detail: 'Attend 3&ndash;4 ceilidhs a year' },
-        { quote: 'My kids absolutely love it. The music is live, the energy is incredible, and it&rsquo;s so much better than a night on the sofa. Best value night out in Edinburgh.', name: 'Davie R.', detail: 'Brings the whole family' }
+        { quote: 'I moved to Edinburgh knowing nobody. I went to a ceilidh on my own and by the end of the night I had a dozen new friends.', name: 'Sarah M.', detail: 'Edinburgh, regular since 2022' },
+        { quote: 'The highlight of our Scotland trip. We came from Berlin for the weekend and stumbled into a ceilidh &mdash; absolutely magical.', name: 'Lena &amp; Erik', detail: 'Visiting from Germany' },
+        { quote: 'As a solo traveller I was nervous, but within minutes I was dancing with strangers who became friends. The caller makes it so easy.', name: 'Priya S.', detail: 'Visiting from India' },
+        { quote: 'My kids love it. Live music, incredible energy, best value night out in Edinburgh.', name: 'Davie R.', detail: 'Brings the whole family' },
+        { quote: 'We booked a ceilidh as part of our honeymoon in Scotland. The caller had us dancing like locals within minutes!', name: 'Tomoko &amp; Kenji', detail: 'Visiting from Japan' },
+        { quote: 'The caller makes it so easy. I was terrified but everyone was encouraging. We now go to every single one.', name: 'James &amp; Fiona T.', detail: 'Edinburgh locals' }
       ] %}
       {% for t in testimonials %}
-      <div class="card" style="padding:var(--sp-xl) var(--sp-lg);display:flex;flex-direction:column;">
-        <div style="color:var(--clr-amber);font-family:var(--ff-display);font-size:3rem;line-height:1;margin-bottom:var(--sp-sm);" aria-hidden="true">&ldquo;</div>
-        <p style="font-size:0.92rem;color:var(--clr-ink-soft);line-height:1.7;flex:1;font-style:italic;margin-bottom:var(--sp-lg);">{{ t.quote | safe }}</p>
-        <div style="border-top:1px solid var(--clr-border);padding-top:var(--sp-md);">
-          <div style="font-weight:700;color:var(--clr-maroon-deep);font-size:0.9rem;">{{ t.name | safe }}</div>
-          <div style="font-size:0.78rem;color:var(--clr-stone);">{{ t.detail | safe }}</div>
+      <div class="card" style="padding:var(--sp-md) var(--sp-md);display:flex;gap:var(--sp-sm);align-items:flex-start;">
+        <div style="color:var(--clr-amber);font-family:var(--ff-display);font-size:1.5rem;line-height:1;flex-shrink:0;" aria-hidden="true">&ldquo;</div>
+        <div>
+          <p style="font-size:0.8rem;color:var(--clr-ink-soft);line-height:1.55;font-style:italic;margin-bottom:var(--sp-xs);">{{ t.quote | safe }}</p>
+          <div style="font-weight:600;color:var(--clr-maroon-deep);font-size:0.72rem;">{{ t.name | safe }} <span style="font-weight:400;color:var(--clr-stone);">&mdash; {{ t.detail | safe }}</span></div>
         </div>
       </div>
       {% endfor %}
